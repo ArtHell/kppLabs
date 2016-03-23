@@ -8,7 +8,7 @@ public class SimpleObject extends Pane {
     Rectangle rect;
 
     public SimpleObject(double x, double y, double w, double h, double sw, Color fillColor,Color strokeColor) {
-        rect = new Rectangle(w,h,fillColor);
+        rect = new Rectangle(w, h, fillColor);
         this.setTranslateX(x);
         this.setTranslateY(y);
         this.getChildren().add(rect);

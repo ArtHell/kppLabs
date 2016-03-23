@@ -30,6 +30,5 @@ public class Bot {
             time = 0;
         }
         time++;
-
     }
 }

@@ -14,15 +14,17 @@ public class Ball extends SimpleObject {
     ArrayList<Integer> indexs;
     Rectangle rect;
     double speedX, kx;
-    double speedY, ky;          //
-    double leftBorder;          // коорд левой стены X
-    double rightBorder;         // коорд правой стены X
-    double topBorder;           // коорд. потолка Y
-    double bottomBorder;        // коорд. дна Y
-    boolean gameOver;           // флаг поражения
-    boolean gameWon;            // флаг победы
-    boolean lc, rc, tc, bc, pc; // флаги столкновений
-    public Ball(double x, double y, double w, double h, double sw, Color fillColor, Color strokeColor, double lb, double rb, double tb, double bb, double speedX, double SpeedY) {
+    double speedY, ky;
+    double leftBorder;
+    double rightBorder;
+    double topBorder;
+    double bottomBorder;
+    boolean gameOver;
+    boolean gameWon;
+    boolean lc, rc, tc, bc, pc;
+
+    public Ball(double x, double y, double w, double h, double sw, Color fillColor, Color strokeColor,
+                double lb, double rb, double tb, double bb, double speedX, double SpeedY) {
         super(x, y, w, h, sw, fillColor, strokeColor);
         gameOver = false;
         gameWon = false;
@@ -37,6 +39,7 @@ public class Ball extends SimpleObject {
         ky = 1;
         kx = 0;
     }
+
     public void checkCollision(){
         if (this.getTranslateX() + speedX*kx <= leftBorder) {
             lc = true;
@@ -51,72 +54,86 @@ public class Ball extends SimpleObject {
 
             gameOver = true;
         }
-        // коллизия с игроком низом
+        // collision with player
         if(ky > 0) {
-            if (this.getTranslateX() + this.getWidth()  > player.getTranslateX() && this.getTranslateX() < player.getTranslateX() + player.getWidth()) {
-                if (this.getTranslateY() <= player.getTranslateY() && this.getTranslateY() + this.getHeight() >= player.getTranslateY()) {
+            if (this.getTranslateX() + this.getWidth()  > player.getTranslateX() &&
+                    this.getTranslateX() < player.getTranslateX() + player.getWidth()) {
+                if (this.getTranslateY() <= player.getTranslateY() &&
+                        this.getTranslateY() + this.getHeight() >= player.getTranslateY()) {
                     pc = true;
                 }
             }
         }
-        // коллизия с игроком правым боком
+		// collision with player
         if(kx > 0) {
-            if (this.getTranslateY() + this.getHeight() > player.getTranslateY() && this.getTranslateY()  < player.getTranslateY() + player.getHeight()) {
-                if (this.getTranslateX()  <= player.getTranslateX() && this.getTranslateX() + this.getWidth()  >= player.getTranslateX()) {
+            if (this.getTranslateY() + this.getHeight() > player.getTranslateY() &&
+                    this.getTranslateY()  < player.getTranslateY() + player.getHeight()) {
+                if (this.getTranslateX()  <= player.getTranslateX() &&
+                        this.getTranslateX() + this.getWidth()  >= player.getTranslateX()) {
                     rc = true;
                 }
             }
         }
-        // коллизия с игроком левым боком
+		// collision with player
         if(kx < 0) {
-            if (this.getTranslateY() + this.getHeight()  > player.getTranslateY() && this.getTranslateY()  < player.getTranslateY() + player.getHeight()) {
-                if (this.getTranslateX()  <= player.getTranslateX() + player.getWidth() && this.getTranslateX() + this.getWidth()  >= player.getTranslateX() + player.getWidth()) {
+            if (this.getTranslateY() + this.getHeight()  > player.getTranslateY() &&
+                    this.getTranslateY()  < player.getTranslateY() + player.getHeight()) {
+                if (this.getTranslateX()  <= player.getTranslateX() + player.getWidth() &&
+                        this.getTranslateX() + this.getWidth()  >= player.getTranslateX() + player.getWidth()) {
                     lc = true;
                 }
             }
         }
-        // коллизия с кирпичом низом
+		// collision with brick
         if(ky > 0) {
             for (int i = 0; i < bricks.size(); i++) {
                 SimpleObject brick = bricks.get(i);
-                if (this.getTranslateX() + this.getWidth()  > brick.getTranslateX() && this.getTranslateX()  < brick.getTranslateX() + brick.getWidth()) {
-                    if (this.getTranslateY()  <= brick.getTranslateY() && this.getTranslateY() + this.getHeight()  >= brick.getTranslateY()) {
+                if (this.getTranslateX() + this.getWidth()  > brick.getTranslateX() &&
+                        this.getTranslateX()  < brick.getTranslateX() + brick.getWidth()) {
+                    if (this.getTranslateY()  <= brick.getTranslateY() &&
+                            this.getTranslateY() + this.getHeight()  >= brick.getTranslateY()) {
                         bc = true;
                         indexs.add(i);
                     }
                 }
             }
         }
-        // коллизия с кирпичом верхом
+		// collision with brick
         if(ky < 0) {
             for (int i = 0; i < bricks.size(); i++) {
                 SimpleObject brick = bricks.get(i);
-                if (this.getTranslateX() + this.getWidth()  > brick.getTranslateX() && this.getTranslateX()  < brick.getTranslateX() + brick.getWidth()) {
-                    if (this.getTranslateY()  <= brick.getTranslateY() + brick.getHeight() && this.getTranslateY() + this.getHeight()  >= brick.getTranslateY() + brick.getHeight()) {
+                if (this.getTranslateX() + this.getWidth()  > brick.getTranslateX() &&
+                        this.getTranslateX()  < brick.getTranslateX() + brick.getWidth()) {
+                    if (this.getTranslateY()  <= brick.getTranslateY() + brick.getHeight() &&
+                            this.getTranslateY() + this.getHeight()  >= brick.getTranslateY() + brick.getHeight()) {
                         tc = true;
                         indexs.add(i);
                     }
                 }
             }
         }
-        // коллизия с кирпичом правым боком
+		// collision with brick
         if(kx > 0) {
             for (int i = 0; i < bricks.size(); i++) {
                 SimpleObject brick = bricks.get(i);
-                if (this.getTranslateY() + this.getHeight()  > brick.getTranslateY() && this.getTranslateY()  < brick.getTranslateY() + brick.getHeight()) {
-                    if (this.getTranslateX()  <= brick.getTranslateX() && this.getTranslateX() + this.getWidth()  >= brick.getTranslateX()) {
+                if (this.getTranslateY() + this.getHeight()  > brick.getTranslateY() &&
+                        this.getTranslateY()  < brick.getTranslateY() + brick.getHeight()) {
+                    if (this.getTranslateX()  <= brick.getTranslateX() &&
+                            this.getTranslateX() + this.getWidth()  >= brick.getTranslateX()) {
                         lc = true;
                         indexs.add(i);
                     }
                 }
             }
         }
-        // коллизия с кирпичом левым боком
+		// collision with brick
         if(kx < 0) {
             for (int i = 0; i < bricks.size(); i++) {
                 SimpleObject brick = bricks.get(i);
-                if (this.getTranslateY() + this.getHeight()  > brick.getTranslateY() && this.getTranslateY()  < brick.getTranslateY() + brick.getHeight()) {
-                    if (this.getTranslateX()  <= brick.getTranslateX() + brick.getWidth() && this.getTranslateX() + this.getWidth()  >= brick.getTranslateX() + brick.getWidth()) {
+                if (this.getTranslateY() + this.getHeight()  > brick.getTranslateY() &&
+                        this.getTranslateY()  < brick.getTranslateY() + brick.getHeight()) {
+                    if (this.getTranslateX()  <= brick.getTranslateX() + brick.getWidth() &&
+                            this.getTranslateX() + this.getWidth()  >= brick.getTranslateX() + brick.getWidth()) {
                         lc = true;
                         indexs.add(i);
                     }
@@ -124,9 +141,9 @@ public class Ball extends SimpleObject {
             }
         }
     }
+
     public void move() {
-        checkCollision(); // проверка коллизий, установка флагов
-        // изменение скорости в зависимости от флагов
+        checkCollision();
         if (tc ^ bc) {
             ky = -ky;
         }
@@ -135,11 +152,12 @@ public class Ball extends SimpleObject {
         }
         if (pc) {
             double k;
-            k = (this.getTranslateX()+this.getWidth()/2-player.getTranslateX()-player.getWidth()/2) / (player.getWidth()/2);
+            k = (this.getTranslateX()+this.getWidth()/2-player.getTranslateX()
+                    -player.getWidth()/2) / (player.getWidth()/2);
             kx = k;
             ky = -0.8 - (1 - Math.abs(k));
         }
-        // уничтожение кирпичей
+        // destroying bricks
         Set ixs = new HashSet(indexs);
         indexs.clear();
         indexs.addAll(ixs);
@@ -155,33 +173,29 @@ public class Ball extends SimpleObject {
             gameWon = true;
         }
 
-        // перемещение мяча
+        // move ball
         setTranslateX(getTranslateX() + speedX*kx);
         setTranslateY(getTranslateY() + speedY*ky);
-        setFlagsInFalse(); // сброс флагов
+        setFlagsInFalse(); // reset flags
     }
-    public void setSpeedX(double speedX) {
-        this.speedX = speedX;
-    }
-    public void setSpeedY(double speedY) {
-        this.speedY = speedY;
-    }
+
     public void setBricks(ArrayList<SimpleObject> bricks) {
-        /*for(SimpleObject b : this.bricks) {
-            b.setVisible(false);
-        }*/
         this.bricks.clear();
         this.bricks.addAll(bricks);
     }
+
     public void setPlayer(Player player) {
         this.player = player;
     }
+
     public boolean isGameOver() {
         return gameOver;
     }
+
     public boolean isGameWon() {
         return gameWon;
     }
+
     public void setFlagsInFalse() {
         lc = false;
         rc = false;
