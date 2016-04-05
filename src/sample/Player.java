@@ -4,7 +4,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Player extends SimpleObject {
-  Rectangle rect;
   double speed;
   double leftBorder;
   double rightBorder;

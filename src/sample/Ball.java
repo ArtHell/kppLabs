@@ -12,7 +12,6 @@ public class Ball extends SimpleObject {
   Player player;
   ArrayList<SimpleObject> bricks;
   ArrayList<Integer> indexs;
-  Rectangle rect;
   double speed, kx, ky;
   double leftBorder;
   double rightBorder;
@@ -20,7 +19,7 @@ public class Ball extends SimpleObject {
   double bottomBorder;
   boolean gameOver;
   boolean gameWon;
-  boolean lc, rc, tc, bc, pc, tcow, bcow;
+  boolean leftCollision, rightCollision, topCollision, bottomCollision, playerCollision, topCover, bottomCover;
 
   public Ball(double x, double y, double w, double h, double sw,
               Color fillColor, Color strokeColor,
@@ -42,14 +41,14 @@ public class Ball extends SimpleObject {
 
   public void checkCollision() {
     if (this.getTranslateX() + speed * kx <= leftBorder) {
-      lc = true;
+      leftCollision = true;
     }
     if (this.getTranslateX() + this.getWidth() + speed * kx
         >= rightBorder) {
-      rc = true;
+      rightCollision = true;
     }
     if (this.getTranslateY() + speed * ky <= topBorder) {
-      tc = true;
+      topCollision = true;
     }
     if (this.getTranslateY() + this.getHeight() + speed * ky
         >= bottomBorder) {
@@ -65,7 +64,7 @@ public class Ball extends SimpleObject {
         if (this.getTranslateY() <= player.getTranslateY() &&
             this.getTranslateY() + this.getHeight()
                 >= player.getTranslateY()) {
-          pc = true;
+          playerCollision = true;
         }
       }
     }
@@ -78,7 +77,7 @@ public class Ball extends SimpleObject {
         if (this.getTranslateX() <= player.getTranslateX() &&
             this.getTranslateX() + this.getWidth()
                 >= player.getTranslateX()) {
-          rc = true;
+          rightCollision = true;
         }
       }
     }
@@ -93,7 +92,7 @@ public class Ball extends SimpleObject {
             this.getTranslateX() + this.getWidth()
                 >= player.getTranslateX()
                 + player.getWidth()) {
-          lc = true;
+          leftCollision = true;
         }
       }
     }
@@ -109,9 +108,9 @@ public class Ball extends SimpleObject {
             this.getTranslateY() + this.getHeight()
                 >= brick.getTranslateY()) {
           if (ky > 0) {
-            bc = true;
+            bottomCollision = true;
           } else {
-            bcow = true;
+            bottomCover = true;
           }
           indexs.add(i);
         }
@@ -131,9 +130,9 @@ public class Ball extends SimpleObject {
                 >= brick.getTranslateY()
                 + brick.getHeight()) {
           if (ky < 0) {
-            tc = true;
+            topCollision = true;
           } else {
-            tcow = true;
+            topCover = true;
           }
           indexs.add(i);
         }
@@ -151,7 +150,7 @@ public class Ball extends SimpleObject {
           if (this.getTranslateX() <= brick.getTranslateX() &&
               this.getTranslateX() + this.getWidth()
                   >= brick.getTranslateX()) {
-            lc = true;
+            leftCollision = true;
             indexs.add(i);
           }
         }
@@ -170,7 +169,7 @@ public class Ball extends SimpleObject {
               this.getTranslateX() + this.getWidth()
                   >= brick.getTranslateX()
                   + brick.getWidth()) {
-            lc = true;
+            leftCollision = true;
             indexs.add(i);
           }
         }
@@ -180,12 +179,12 @@ public class Ball extends SimpleObject {
 
   public void move() {
     checkCollision();
-    if ((tc && !bcow) ^ (bc && !tcow)) {
+    if ((topCollision && !bottomCover) ^ (bottomCollision && !topCover)) {
       ky = -ky;
-    } else if (lc ^ rc) {
+    } else if (leftCollision ^ rightCollision) {
       kx = -kx;
     }
-    if (pc) {
+    if (playerCollision) {
       double k;
       k = (this.getTranslateX() + this.getWidth() / 2
           - player.getTranslateX()
@@ -233,12 +232,12 @@ public class Ball extends SimpleObject {
   }
 
   public void setFlagsInFalse() {
-    lc = false;
-    rc = false;
-    tc = false;
-    bc = false;
-    pc = false;
-    tcow = false;
-    bcow = false;
+    leftCollision = false;
+    rightCollision = false;
+    topCollision = false;
+    bottomCollision = false;
+    playerCollision = false;
+    topCover = false;
+    bottomCover = false;
   }
 }

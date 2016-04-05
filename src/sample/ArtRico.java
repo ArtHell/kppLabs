@@ -17,36 +17,30 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class ArtRico extends Application {
-  final int sceneWidth = 1280;
-  final int sceneHeight = 640;
-  final int wallWidth = 10;
-  final int strokeWidth = 2;
-  final int topHeight = 30;
-  final int bottomHeight = 10;
-  final int playerHeight = 20;
-  final int playerPosY = 570;
-  final int playerWidthEasy = 280;
-  final int playerWidthMedium = 200;
-  final int playerWidthHard = 200;
-  final int playerSpeedEasy = 10;
-  final int playerSpeedMedium = 10;
-  final int playerSpeedHard = 20;
-  final int ballSpeedEasy = 5;
-  final int ballSpeedMedium = 5;
-  final int ballSpeedHard = 10;
-  final int ballSize = 20;
-  final int bricksN = 15;
-  final int bricksM = 8;
-  final int bricksHeight = 40;
-  final int bricksWidth = 80;
-  final int buttonWidth = 260;
-  final int buttonHeight = 80;
-
-  String exitButton;
-  String pauseButton;
-  String botButton;
-  String turnLeftButton;
-  String turnRightButton;
+  final int SCENE_WIDTH = 1280;
+  final int SCENE_HEIGHT = 640;
+  final int WALL_WIDTH = 10;
+  final int STROKE_WIDTH = 2;
+  final int TOP_HEIGHT = 30;
+  final int BOTTOM_HEIGHT = 10;
+  final int PLAYER_HEIGHT = 20;
+  final int PLAYER_POS_Y = 570;
+  final int PLAYER_WIDTH_EASY = 280;
+  final int PLAYER_WIDTH_MEDIUM = 200;
+  final int PLAYER_WIDTH_HARD = 200;
+  final int PLAYER_SPEED_EASY = 10;
+  final int PLAYER_SPEED_MEDIUM = 10;
+  final int PLAYER_SPEED_HARD = 20;
+  final int BALL_SPEED_EASY = 5;
+  final int BALL_SPEED_MEDIUM = 5;
+  final int BALL_SPEED_HARD = 10;
+  final int BALL_SIZE = 20;
+  final int BRICKS_IN_RAW = 15;
+  final int BRICKS_IN_COLOMN = 8;
+  final int BRICKS_HEIGHT = 40;
+  final int BRICKS_WIDTH = 80;
+  final int BUTTON_WIDTH = 260;
+  final int BUTTON_HEIGHT = 80;
 
   Pane gameRoot;
   Pane menuRoot;
@@ -119,16 +113,16 @@ public class ArtRico extends Application {
   private Parent createContent(int mode) {
     pause = true;
     gameRoot = new Pane();
-    gameRoot.setPrefSize(1280, 640);
-    Rectangle bg = new Rectangle(sceneWidth, sceneHeight, Color.GREY);
-    leftWall = new SimpleObject(0, 0, wallWidth, sceneHeight,
-        strokeWidth, Color.ORANGE, Color.BEIGE);
-    rightWall = new SimpleObject(sceneWidth - wallWidth, 0, wallWidth,
-        sceneWidth, strokeWidth, Color.ORANGE, Color.BEIGE);
-    bottom = new SimpleObject(0, sceneHeight, sceneWidth, bottomHeight,
-        strokeWidth, Color.ORANGE, Color.BEIGE);
-    top = new SimpleObject(0, 0, sceneWidth, topHeight,
-        strokeWidth, Color.ORANGE, Color.BEIGE);
+    gameRoot.setPrefSize(SCENE_WIDTH, SCENE_HEIGHT);
+    Rectangle bg = new Rectangle(SCENE_WIDTH, SCENE_HEIGHT, Color.GREY);
+    leftWall = new SimpleObject(0, 0, WALL_WIDTH, SCENE_HEIGHT,
+        STROKE_WIDTH, Color.ORANGE, Color.BEIGE);
+    rightWall = new SimpleObject(SCENE_WIDTH - WALL_WIDTH, 0, WALL_WIDTH,
+        SCENE_WIDTH, STROKE_WIDTH, Color.ORANGE, Color.BEIGE);
+    bottom = new SimpleObject(0, SCENE_HEIGHT, SCENE_WIDTH, BOTTOM_HEIGHT,
+        STROKE_WIDTH, Color.ORANGE, Color.BEIGE);
+    top = new SimpleObject(0, 0, SCENE_WIDTH, TOP_HEIGHT,
+        STROKE_WIDTH, Color.ORANGE, Color.BEIGE);
     score = 0;
     scoreLabel = new Label("Score : " + score);
     scoreLabel.setLayoutX(40);
@@ -137,37 +131,37 @@ public class ArtRico extends Application {
 
     switch (mode) {
       case 0: {
-        player = new Player(sceneWidth / 2 - playerWidthEasy / 2,
-            playerPosY, playerWidthEasy, playerHeight,
-            strokeWidth, Color.ORANGE, Color.BEIGE,
-            wallWidth, sceneWidth - wallWidth, playerSpeedEasy);
-        ball = new Ball(sceneWidth / 2 - ballSize / 2, playerPosY - ballSize,
-            ballSize, ballSize, strokeWidth, Color.ORANGE,
-            Color.BEIGE, wallWidth, sceneWidth - wallWidth,
-            topHeight, sceneHeight, ballSpeedEasy);
+        player = new Player(SCENE_WIDTH / 2 - PLAYER_WIDTH_EASY / 2,
+            PLAYER_POS_Y, PLAYER_WIDTH_EASY, PLAYER_HEIGHT,
+            STROKE_WIDTH, Color.ORANGE, Color.BEIGE,
+            WALL_WIDTH, SCENE_WIDTH - WALL_WIDTH, PLAYER_SPEED_EASY);
+        ball = new Ball(SCENE_WIDTH / 2 - BALL_SIZE / 2, PLAYER_POS_Y - BALL_SIZE,
+            BALL_SIZE, BALL_SIZE, STROKE_WIDTH, Color.ORANGE,
+            Color.BEIGE, WALL_WIDTH, SCENE_WIDTH - WALL_WIDTH,
+            TOP_HEIGHT, SCENE_HEIGHT, BALL_SPEED_EASY);
         break;
       }
       case 1: {
-        player = new Player(sceneWidth / 2 - playerWidthMedium / 2,
-            playerPosY, playerWidthMedium,
-            playerHeight, strokeWidth, Color.ORANGE, Color.BEIGE,
-            wallWidth, sceneWidth - wallWidth, playerSpeedMedium);
-        ball = new Ball(sceneWidth / 2 - ballSize / 2, playerPosY - ballSize,
-            ballSize, ballSize, strokeWidth, Color.ORANGE,
-            Color.BEIGE, wallWidth, sceneWidth - wallWidth,
-            topHeight, sceneHeight, ballSpeedMedium);
+        player = new Player(SCENE_WIDTH / 2 - PLAYER_WIDTH_MEDIUM / 2,
+            PLAYER_POS_Y, PLAYER_WIDTH_MEDIUM,
+            PLAYER_HEIGHT, STROKE_WIDTH, Color.ORANGE, Color.BEIGE,
+            WALL_WIDTH, SCENE_WIDTH - WALL_WIDTH, PLAYER_SPEED_MEDIUM);
+        ball = new Ball(SCENE_WIDTH / 2 - BALL_SIZE / 2, PLAYER_POS_Y - BALL_SIZE,
+            BALL_SIZE, BALL_SIZE, STROKE_WIDTH, Color.ORANGE,
+            Color.BEIGE, WALL_WIDTH, SCENE_WIDTH - WALL_WIDTH,
+            TOP_HEIGHT, SCENE_HEIGHT, BALL_SPEED_MEDIUM);
         break;
       }
       case 2: {
-        player = new Player(sceneWidth / 2 - playerWidthHard / 2,
-            playerPosY, playerWidthHard, playerHeight,
-            strokeWidth, Color.ORANGE, Color.BEIGE,
-            wallWidth, sceneWidth - wallWidth, playerSpeedHard);
-        ball = new Ball(sceneWidth / 2 - ballSize / 2,
-            playerPosY - ballSize, ballSize,
-            ballSize, strokeWidth, Color.ORANGE,
-            Color.BEIGE, wallWidth, sceneWidth - wallWidth,
-            topHeight, sceneHeight, ballSpeedHard);
+        player = new Player(SCENE_WIDTH / 2 - PLAYER_WIDTH_HARD / 2,
+            PLAYER_POS_Y, PLAYER_WIDTH_HARD, PLAYER_HEIGHT,
+            STROKE_WIDTH, Color.ORANGE, Color.BEIGE,
+            WALL_WIDTH, SCENE_WIDTH - WALL_WIDTH, PLAYER_SPEED_HARD);
+        ball = new Ball(SCENE_WIDTH / 2 - BALL_SIZE / 2,
+            PLAYER_POS_Y - BALL_SIZE, BALL_SIZE,
+            BALL_SIZE, STROKE_WIDTH, Color.ORANGE,
+            Color.BEIGE, WALL_WIDTH, SCENE_WIDTH - WALL_WIDTH,
+            TOP_HEIGHT, SCENE_HEIGHT, BALL_SPEED_HARD);
         break;
       }
 
@@ -179,7 +173,7 @@ public class ArtRico extends Application {
     gameRoot.getChildren().addAll(bg, player, ball, leftWall, rightWall,
         bottom, top, scoreLabel);
     bricks = new ArrayList<>();
-    createBricks(bricksN, bricksM, bricksWidth, bricksHeight);
+    createBricks(BRICKS_IN_RAW, BRICKS_IN_COLOMN, BRICKS_WIDTH, BRICKS_HEIGHT);
     return gameRoot;
   }
 
@@ -189,7 +183,7 @@ public class ArtRico extends Application {
     for (int i = 0; i < raw; i++) {
       for (int j = 0; j < colomn; j++) {
         SimpleObject brick = new SimpleObject(j * w + 40, i * h + 75,
-            w, h, strokeWidth, Color.ORANGE, Color.BEIGE);
+            w, h, STROKE_WIDTH, Color.ORANGE, Color.BEIGE);
         bricks.add(brick);
 
       }
@@ -200,12 +194,12 @@ public class ArtRico extends Application {
 
   private void restart() {
     gameRoot.getChildren().removeAll(bricks);
-    createBricks(bricksN, bricksM, bricksWidth, bricksHeight);
+    createBricks(BRICKS_IN_RAW, BRICKS_IN_COLOMN, BRICKS_WIDTH, BRICKS_HEIGHT);
     score = 0;
-    player.setTranslateX(sceneWidth / 2 - player.getWidth() / 2 + strokeWidth / 2);
-    player.setTranslateY(playerPosY);
-    ball.setTranslateX(sceneWidth / 2 - ballSize / 2);
-    ball.setTranslateY(playerPosY - ballSize);
+    player.setTranslateX(SCENE_WIDTH / 2 - player.getWidth() / 2 + STROKE_WIDTH / 2);
+    player.setTranslateY(PLAYER_POS_Y);
+    ball.setTranslateX(SCENE_WIDTH / 2 - BALL_SIZE / 2);
+    ball.setTranslateY(PLAYER_POS_Y - BALL_SIZE);
     ball.gameOver = false;
     ball.setFlagsInFalse();
   }
@@ -246,7 +240,7 @@ public class ArtRico extends Application {
     Button button = new Button(msg + score);
     button.setLayoutX(510);
     button.setLayoutY(240);
-    button.setPrefSize(buttonWidth, buttonHeight);
+    button.setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
     button.setOnAction(e -> {
       pause = false;
       button.setVisible(false);
@@ -260,15 +254,15 @@ public class ArtRico extends Application {
 
   private void showMenu(Stage primaryStage) {
     menuRoot = new Pane();
-    menuRoot.setPrefSize(sceneWidth, sceneHeight);
-    Rectangle bg = new Rectangle(sceneWidth, sceneHeight, Color.GREY);
+    menuRoot.setPrefSize(SCENE_WIDTH, SCENE_HEIGHT);
+    Rectangle bg = new Rectangle(SCENE_WIDTH, SCENE_HEIGHT, Color.GREY);
     Button[] button1 = new Button[4];
 
     for (int i = 0; i < 4; i++) {
       button1[i] = new Button();
       button1[i].setLayoutX(510);
       button1[i].setLayoutY(i * 100 + 140);
-      button1[i].setPrefSize(buttonWidth, buttonHeight);
+      button1[i].setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
       menuRoot.getChildren().add(button1[i]);
     }
 
@@ -284,7 +278,7 @@ public class ArtRico extends Application {
         button2[i] = new Button();
         button2[i].setLayoutX(510);
         button2[i].setLayoutY(i * 100 + 140);
-        button2[i].setPrefSize(buttonWidth, buttonHeight);
+        button2[i].setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
         menuRoot.getChildren().add(button2[i]);
       }
       button2[0].setText("Easy");
