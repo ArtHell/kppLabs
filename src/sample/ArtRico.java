@@ -16,32 +16,8 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class ArtRico extends Application {
-  final int SCENE_WIDTH = 1280;
-  final int SCENE_HEIGHT = 640;
-  final int WALL_WIDTH = 10;
-  final int STROKE_WIDTH = 2;
-  final int TOP_HEIGHT = 30;
-  final int BOTTOM_HEIGHT = 10;
-  final int PLAYER_HEIGHT = 20;
-  final int PLAYER_POS_Y = 570;
-  final int PLAYER_WIDTH_EASY = 280;
-  final int PLAYER_WIDTH_MEDIUM = 200;
-  final int PLAYER_WIDTH_HARD = 200;
-  final int PLAYER_SPEED_EASY = 10;
-  final int PLAYER_SPEED_MEDIUM = 10;
-  final int PLAYER_SPEED_HARD = 20;
-  final int BALL_SPEED_EASY = 5;
-  final int BALL_SPEED_MEDIUM = 5;
-  final int BALL_SPEED_HARD = 10;
-  final int BALL_SIZE = 20;
-  final int BRICKS_IN_RAW = 15;
-  final int BRICKS_IN_COLOMN = 8;
-  final int BRICKS_HEIGHT = 40;
-  final int BRICKS_WIDTH = 80;
-  final int BUTTON_WIDTH = 260;
-  final int BUTTON_HEIGHT = 80;
-
+public class ArtRico extends Application
+    implements Constants, MoveConstants {
   Pane gameRoot;
   Pane menuRoot;
   Scene scene;
@@ -59,6 +35,12 @@ public class ArtRico extends Application {
   static HashSet<String> lastKey;
   boolean pause;
   AnimationTimer timer;
+  String replay;
+  char gameMode;
+  char replayMode;
+  boolean replayNow;
+  int replayIterator;
+
 
 
   @Override
@@ -67,7 +49,7 @@ public class ArtRico extends Application {
     showMenu(primaryStage);
   }
 
-  private void startGame(Stage primaryStage, int mode) {
+  private void startGame(Stage primaryStage, char mode) {
     scene = new Scene(createContent(mode));
     prepareActionHandlers();
     primaryStage.setScene(scene);
@@ -77,10 +59,28 @@ public class ArtRico extends Application {
       @Override
       public void handle(long now) {
         if (ball.isGameWon()) {
-          showMessage("You won! Your score is: ");
+          if(replayNow){
+            gameRoot.getChildren().clear();
+            timer.stop();
+            showMenu(primaryStage);
+          } else{
+            replay = mode + replay;
+            Serializer.saveReplay(REPLAY_FILE,replay);
+            replay = "";
+            showMessage("You won! Your score is: ");
+          }
         }
         if (ball.isGameOver()) {
-          showMessage("You lose! Your score is: ");
+          if(replayNow){
+            gameRoot.getChildren().clear();
+            timer.stop();
+            showMenu(primaryStage);
+          } else {
+            replay = mode + replay;
+            Serializer.saveReplay(REPLAY_FILE, replay);
+            replay = "";
+            showMessage("You lose! Your score is: ");
+          }
         }
         if (lastKey.contains("SPACE")) {
           if (pause == false) {
@@ -110,7 +110,7 @@ public class ArtRico extends Application {
     timer.start();
   }
 
-  private Parent createContent(int mode) {
+  private Parent createContent(char mode) {
     pause = true;
     gameRoot = new Pane();
     gameRoot.setPrefSize(SCENE_WIDTH, SCENE_HEIGHT);
@@ -130,7 +130,7 @@ public class ArtRico extends Application {
     scoreLabel.setFont(javafx.scene.text.Font.font(20));
 
     switch (mode) {
-      case 0: {
+      case 'e': {
         player = new Player(SCENE_WIDTH / 2 - PLAYER_WIDTH_EASY / 2,
             PLAYER_POS_Y, PLAYER_WIDTH_EASY, PLAYER_HEIGHT,
             STROKE_WIDTH, Color.ORANGE, Color.BEIGE,
@@ -141,7 +141,7 @@ public class ArtRico extends Application {
             TOP_HEIGHT, SCENE_HEIGHT, BALL_SPEED_EASY);
         break;
       }
-      case 1: {
+      case 'm': {
         player = new Player(SCENE_WIDTH / 2 - PLAYER_WIDTH_MEDIUM / 2,
             PLAYER_POS_Y, PLAYER_WIDTH_MEDIUM,
             PLAYER_HEIGHT, STROKE_WIDTH, Color.ORANGE, Color.BEIGE,
@@ -152,7 +152,7 @@ public class ArtRico extends Application {
             TOP_HEIGHT, SCENE_HEIGHT, BALL_SPEED_MEDIUM);
         break;
       }
-      case 2: {
+      case 'h': {
         player = new Player(SCENE_WIDTH / 2 - PLAYER_WIDTH_HARD / 2,
             PLAYER_POS_Y, PLAYER_WIDTH_HARD, PLAYER_HEIGHT,
             STROKE_WIDTH, Color.ORANGE, Color.BEIGE,
@@ -205,12 +205,25 @@ public class ArtRico extends Application {
   }
 
   private void update() {
-    if (bot.isOn()) {
-      bot.Execute();
-    } else if (currentlyActiveKeys.contains("LEFT")) {
-      player.moveLeft();
-    } else if (currentlyActiveKeys.contains("RIGHT")) {
-      player.moveRight();
+    char direction;
+    if(replayNow) {
+      switch(replay.toCharArray()[replayIterator]) {
+        case MOVED_LEFT: player.moveLeft(); break;
+        case MOVED_RIGHT: player.moveRight(); break;
+        default: break;
+      }
+      replayIterator++;
+    } else {
+      if (bot.isOn()) {
+        direction = bot.Execute();
+      } else if (currentlyActiveKeys.contains("LEFT")) {
+        direction = player.moveLeft();
+      } else if (currentlyActiveKeys.contains("RIGHT")) {
+        direction = player.moveRight();
+      } else {
+        direction = NOT_MOVED;
+      }
+      replay += direction;
     }
     ball.move();
     scoreLabel.setText("Score : " + score);
@@ -253,57 +266,75 @@ public class ArtRico extends Application {
   }
 
   private void showMenu(Stage primaryStage) {
+    replayNow = false;
+    replay = "";
     menuRoot = new Pane();
     menuRoot.setPrefSize(SCENE_WIDTH, SCENE_HEIGHT);
     Rectangle bg = new Rectangle(SCENE_WIDTH, SCENE_HEIGHT, Color.GREY);
-    Button[] button1 = new Button[4];
+    Button[] mainMenuButtons = new Button[MENU_SIZE];
 
-    for (int i = 0; i < 4; i++) {
-      button1[i] = new Button();
-      button1[i].setLayoutX(510);
-      button1[i].setLayoutY(i * 100 + 140);
-      button1[i].setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-      menuRoot.getChildren().add(button1[i]);
+    for (int i = 0; i < MENU_SIZE; i++) {
+      mainMenuButtons[i] = new Button();
+      mainMenuButtons[i].setLayoutX(510);
+      mainMenuButtons[i].setLayoutY(i * 100 + 140);
+      mainMenuButtons[i].setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+      menuRoot.getChildren().add(mainMenuButtons[i]);
     }
 
-    button1[0].setText("NEW GAME");
-    button1[1].setText("SETTINGS");
-    button1[2].setText("ABOUT");
-    button1[3].setText("EXIT");
+    mainMenuButtons[0].setText("NEW GAME");
+    mainMenuButtons[1].setText("SETTINGS");
+    mainMenuButtons[2].setText("ABOUT");
+    mainMenuButtons[3].setText("REPLAY");
+    mainMenuButtons[4].setText("EXIT");
 
-    button1[0].setOnAction(e -> {
-      menuRoot.getChildren().removeAll(button1);
-      Button[] button2 = new Button[4];
-      for (int i = 0; i < 4; i++) {
-        button2[i] = new Button();
-        button2[i].setLayoutX(510);
-        button2[i].setLayoutY(i * 100 + 140);
-        button2[i].setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-        menuRoot.getChildren().add(button2[i]);
+    mainMenuButtons[0].setOnAction(e -> {
+      menuRoot.getChildren().removeAll(mainMenuButtons);
+      Button[] newGameMenuButtons = new Button[4];
+      for (int i = 0; i < NEW_GAME_MENU_SIZE; i++) {
+        newGameMenuButtons[i] = new Button();
+        newGameMenuButtons[i].setLayoutX(510);
+        newGameMenuButtons[i].setLayoutY(i * 100 + 140);
+        newGameMenuButtons[i].setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+        menuRoot.getChildren().add(newGameMenuButtons[i]);
       }
-      button2[0].setText("Easy");
-      button2[1].setText("Medium");
-      button2[2].setText("Hard");
-      button2[3].setText("Back");
-      button2[0].setOnAction(event -> {
+      newGameMenuButtons[0].setText("Easy");
+      newGameMenuButtons[1].setText("Medium");
+      newGameMenuButtons[2].setText("Hard");
+      newGameMenuButtons[3].setText("Back");
+      newGameMenuButtons[0].setOnAction(event -> {
         menuRoot.getChildren().clear();
-        startGame(primaryStage, 0);
+        gameMode = EASY_MODE;
+        startGame(primaryStage, EASY_MODE);
       });
-      button2[1].setOnAction(event -> {
+      newGameMenuButtons[1].setOnAction(event -> {
         menuRoot.getChildren().clear();
-        startGame(primaryStage, 1);
+        gameMode = MEDIUM_MODE;
+        startGame(primaryStage, MEDIUM_MODE);
       });
-      button2[2].setOnAction(event -> {
+      newGameMenuButtons[2].setOnAction(event -> {
         menuRoot.getChildren().clear();
-        startGame(primaryStage, 2);
+        gameMode = HARD_MODE;
+        startGame(primaryStage, HARD_MODE);
       });
-      button2[3].setOnAction(event -> {
-        menuRoot.getChildren().removeAll(button2);
-        menuRoot.getChildren().addAll(button1);
+      newGameMenuButtons[3].setOnAction(event -> {
+        menuRoot.getChildren().removeAll(newGameMenuButtons);
+        menuRoot.getChildren().addAll(mainMenuButtons);
       });
     });
 
-    button1[3].setOnAction(event -> {
+    mainMenuButtons[3].setOnAction(event -> {
+      replay = Serializer.loadReplay(REPLAY_FILE);
+      if(!replay.isEmpty()) {
+        replayNow = true;
+        replayMode = replay.toCharArray()[0];
+        replayIterator = 1;
+        menuRoot.getChildren().clear();
+        startGame(primaryStage, replayMode);
+      }
+
+    });
+
+    mainMenuButtons[4].setOnAction(event -> {
       System.exit(0);
     });
 

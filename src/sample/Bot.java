@@ -14,27 +14,28 @@ public class Bot {
     on = false;
   }
 
-  public void Execute() {
+  public char Execute() {
+    char direction;
     if (time < timeOfMoving) {
       if (player.getTranslateX() + player.getWidth() / 2
           < ball.getTranslateX() + ball.getWidth()) {
-        player.moveRight();
+        direction = player.moveRight();
       } else {
-        player.moveLeft();
+        direction = player.moveLeft();
       }
-    }
-    if (time > timeOfMoving) {
-      if (player.getTranslateX() + player.getWidth() / 2
-          < ball.getTranslateX()) {
-        player.moveRight();
-      } else {
-        player.moveLeft();
-      }
-    }
-    if (time == timeOfMoving * 2) {
-      time = 0;
+    } else {
+        if (player.getTranslateX() + player.getWidth() / 2
+            < ball.getTranslateX()) {
+          direction = player.moveRight();
+        } else {
+          direction = player.moveLeft();
+        }
+        if (time == timeOfMoving * 2) {
+          time = 0;
+        }
     }
     time++;
+    return direction;
   }
 
   public boolean isOn() {

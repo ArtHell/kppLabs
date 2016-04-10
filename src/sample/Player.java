@@ -3,7 +3,7 @@ package sample;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class Player extends SimpleObject {
+public class Player extends SimpleObject implements MoveConstants {
   double speed;
   double leftBorder;
   double rightBorder;
@@ -17,17 +17,19 @@ public class Player extends SimpleObject {
     this.speed = speed;
   }
 
-  public void moveLeft() {
+  public char moveLeft() {
     if (this.getTranslateX() <= leftBorder) {
-      return;
+      return NOT_MOVED;
     }
     setTranslateX(this.getTranslateX() - speed);
+    return MOVED_LEFT;
   }
 
-  public void moveRight() {
+  public char moveRight() {
     if (this.getTranslateX() + this.getWidth() >= rightBorder) {
-      return;
+      return NOT_MOVED;
     }
     setTranslateX(this.getTranslateX() + speed);
+    return MOVED_RIGHT;
   }
 }
