@@ -24,15 +24,15 @@ public class Bot {
         direction = player.moveLeft();
       }
     } else {
-        if (player.getTranslateX() + player.getWidth() / 2
-            < ball.getTranslateX()) {
-          direction = player.moveRight();
-        } else {
-          direction = player.moveLeft();
-        }
-        if (time == timeOfMoving * 2) {
-          time = 0;
-        }
+      if (player.getTranslateX() + player.getWidth() / 2
+          < ball.getTranslateX()) {
+        direction = player.moveRight();
+      } else {
+        direction = player.moveLeft();
+      }
+      if (time == timeOfMoving * 2) {
+        time = 0;
+      }
     }
     time++;
     return direction;

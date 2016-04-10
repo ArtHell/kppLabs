@@ -42,7 +42,6 @@ public class ArtRico extends Application
   int replayIterator;
 
 
-
   @Override
   public void start(Stage primaryStage) {
     primaryStage.setTitle("ArtRik");
@@ -59,19 +58,19 @@ public class ArtRico extends Application
       @Override
       public void handle(long now) {
         if (ball.isGameWon()) {
-          if(replayNow){
+          if (replayNow) {
             gameRoot.getChildren().clear();
             timer.stop();
             showMenu(primaryStage);
-          } else{
+          } else {
             replay = mode + replay;
-            Serializer.saveReplay(REPLAY_FILE,replay);
+            Serializer.saveReplay(REPLAY_FILE, replay);
             replay = "";
             showMessage("You won! Your score is: ");
           }
         }
         if (ball.isGameOver()) {
-          if(replayNow){
+          if (replayNow) {
             gameRoot.getChildren().clear();
             timer.stop();
             showMenu(primaryStage);
@@ -130,7 +129,7 @@ public class ArtRico extends Application
     scoreLabel.setFont(javafx.scene.text.Font.font(20));
 
     switch (mode) {
-      case 'e': {
+      case EASY_MODE: {
         player = new Player(SCENE_WIDTH / 2 - PLAYER_WIDTH_EASY / 2,
             PLAYER_POS_Y, PLAYER_WIDTH_EASY, PLAYER_HEIGHT,
             STROKE_WIDTH, Color.ORANGE, Color.BEIGE,
@@ -141,7 +140,7 @@ public class ArtRico extends Application
             TOP_HEIGHT, SCENE_HEIGHT, BALL_SPEED_EASY);
         break;
       }
-      case 'm': {
+      case MEDIUM_MODE: {
         player = new Player(SCENE_WIDTH / 2 - PLAYER_WIDTH_MEDIUM / 2,
             PLAYER_POS_Y, PLAYER_WIDTH_MEDIUM,
             PLAYER_HEIGHT, STROKE_WIDTH, Color.ORANGE, Color.BEIGE,
@@ -152,7 +151,7 @@ public class ArtRico extends Application
             TOP_HEIGHT, SCENE_HEIGHT, BALL_SPEED_MEDIUM);
         break;
       }
-      case 'h': {
+      case HARD_MODE: {
         player = new Player(SCENE_WIDTH / 2 - PLAYER_WIDTH_HARD / 2,
             PLAYER_POS_Y, PLAYER_WIDTH_HARD, PLAYER_HEIGHT,
             STROKE_WIDTH, Color.ORANGE, Color.BEIGE,
@@ -206,11 +205,16 @@ public class ArtRico extends Application
 
   private void update() {
     char direction;
-    if(replayNow) {
-      switch(replay.toCharArray()[replayIterator]) {
-        case MOVED_LEFT: player.moveLeft(); break;
-        case MOVED_RIGHT: player.moveRight(); break;
-        default: break;
+    if (replayNow) {
+      switch (replay.toCharArray()[replayIterator]) {
+        case MOVED_LEFT:
+          player.moveLeft();
+          break;
+        case MOVED_RIGHT:
+          player.moveRight();
+          break;
+        default:
+          break;
       }
       replayIterator++;
     } else {
@@ -324,7 +328,7 @@ public class ArtRico extends Application
 
     mainMenuButtons[3].setOnAction(event -> {
       replay = Serializer.loadReplay(REPLAY_FILE);
-      if(!replay.isEmpty()) {
+      if (!replay.isEmpty()) {
         replayNow = true;
         replayMode = replay.toCharArray()[0];
         replayIterator = 1;
