@@ -1,5 +1,8 @@
 package sample;
 
+/**
+ *
+ */
 public class Bot {
   final int timeOfMoving = 2000;
   Player player;
@@ -7,6 +10,10 @@ public class Bot {
   int time;
   boolean on;
 
+  /**
+   * @param player
+   * @param ball
+   */
   public Bot(Player player, Ball ball) {
     this.player = player;
     this.ball = ball;
@@ -14,39 +21,46 @@ public class Bot {
     on = false;
   }
 
-  public char Execute() {
-    char direction;
+  /**
+   * @return
+   */
+  public char execute() {
+    if (time == timeOfMoving * 2) {
+      time = 0;
+    }
+    time++;
     if (time < timeOfMoving) {
       if (player.getTranslateX() + player.getWidth() / 2
           < ball.getTranslateX() + ball.getWidth()) {
-        direction = player.moveRight();
+        return 'r';
       } else {
-        direction = player.moveLeft();
+        return 'l';
       }
     } else {
       if (player.getTranslateX() + player.getWidth() / 2
           < ball.getTranslateX()) {
-        direction = player.moveRight();
+        return 'r';
       } else {
-        direction = player.moveLeft();
-      }
-      if (time == timeOfMoving * 2) {
-        time = 0;
+        return 'l';
       }
     }
-    time++;
-    return direction;
   }
 
+  /**
+   * @return
+   */
   public boolean isOn() {
     return on;
   }
 
-  public void setOn() {
-    on = true;
-  }
-
-  public void setOff() {
-    on = false;
+  /**
+   *
+   */
+  public void switchMode() {
+    if (on) {
+      on = false;
+    } else {
+      on = true;
+    }
   }
 }

@@ -1,0 +1,16 @@
+.root {
+    -fx-background-color: gray;
+}
+
+.button {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-background-color: orange;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.player {
+    -fx-fill: orange;
+}

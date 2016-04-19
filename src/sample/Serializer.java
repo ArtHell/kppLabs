@@ -2,8 +2,14 @@ package sample;
 
 import java.io.*;
 
+/**
+ *
+ */
 public class Serializer {
-
+  /**
+   * @param fileName
+   * @param string
+   */
   public static void saveReplay(String fileName, String string) {
     File file = new File(fileName);
     try (FileWriter writer = new FileWriter(file, false)) {
@@ -14,6 +20,10 @@ public class Serializer {
     }
   }
 
+  /**
+   * @param fileName
+   * @return
+   */
   public static String loadReplay(String fileName) {
     File file = new File(fileName);
     String replay = "";

@@ -8,6 +8,9 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ *
+ */
 public class Ball extends SimpleObject {
   Player player;
   ArrayList<SimpleObject> bricks;
@@ -19,8 +22,29 @@ public class Ball extends SimpleObject {
   double bottomBorder;
   boolean gameOver;
   boolean gameWon;
-  boolean leftCollision, rightCollision, topCollision, bottomCollision, playerCollision, topCover, bottomCover;
-
+  boolean leftCollision;
+  boolean rightCollision;
+  boolean topCollision;
+  boolean bottomCollision;
+  boolean playerCollision;
+  boolean topCover;
+  boolean bottomCover;
+  int score;
+  /**
+   *
+   * @param x
+   * @param y
+   * @param w
+   * @param h
+   * @param sw
+   * @param fillColor
+   * @param strokeColor
+   * @param lb
+   * @param rb
+   * @param tb
+   * @param bb
+   * @param speed
+   */
   public Ball(double x, double y, double w, double h, double sw,
               Color fillColor, Color strokeColor,
               double lb, double rb, double tb,
@@ -39,6 +63,9 @@ public class Ball extends SimpleObject {
     kx = 0;
   }
 
+  /**
+   *
+   */
   public void checkCollision() {
     if (this.getTranslateX() + speed * kx <= leftBorder) {
       leftCollision = true;
@@ -177,6 +204,9 @@ public class Ball extends SimpleObject {
     }
   }
 
+  /**
+   *
+   */
   public void move() {
     checkCollision();
     if ((topCollision && !bottomCover) ^ (bottomCollision && !topCover)) {
@@ -202,7 +232,7 @@ public class Ball extends SimpleObject {
       b.setVisible(false);
       bricks.remove(b);
       indexs.remove(0);
-      ArtRico.score += 1;
+      score++;
     }
     if (bricks.size() == 0) {
       gameWon = true;
@@ -214,23 +244,42 @@ public class Ball extends SimpleObject {
     setFlagsInFalse(); // reset flags
   }
 
+  /**
+   *
+   * @param bricks
+   */
   public void setBricks(ArrayList<SimpleObject> bricks) {
     this.bricks.clear();
     this.bricks.addAll(bricks);
   }
 
+  /**
+   *
+   * @param player
+   */
   public void setPlayer(Player player) {
     this.player = player;
   }
 
+  /**
+   *
+   * @return
+   */
   public boolean isGameOver() {
     return gameOver;
   }
 
+  /**
+   *
+   * @return
+   */
   public boolean isGameWon() {
     return gameWon;
   }
 
+  /**
+   *
+   */
   public void setFlagsInFalse() {
     leftCollision = false;
     rightCollision = false;
