@@ -30,8 +30,8 @@ public class Ball extends SimpleObject {
   boolean topCover;
   boolean bottomCover;
   int score;
+
   /**
-   *
    * @param x
    * @param y
    * @param w
@@ -245,16 +245,15 @@ public class Ball extends SimpleObject {
   }
 
   /**
-   *
    * @param bricks
    */
   public void setBricks(ArrayList<SimpleObject> bricks) {
     this.bricks.clear();
+    score = 0;
     this.bricks.addAll(bricks);
   }
 
   /**
-   *
    * @param player
    */
   public void setPlayer(Player player) {
@@ -262,7 +261,6 @@ public class Ball extends SimpleObject {
   }
 
   /**
-   *
    * @return
    */
   public boolean isGameOver() {
@@ -270,7 +268,6 @@ public class Ball extends SimpleObject {
   }
 
   /**
-   *
    * @return
    */
   public boolean isGameWon() {

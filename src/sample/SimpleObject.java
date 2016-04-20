@@ -11,7 +11,6 @@ public class SimpleObject extends Pane {
   Rectangle rect;
 
   /**
-   *
    * @param x
    * @param y
    * @param w

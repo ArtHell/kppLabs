@@ -20,7 +20,7 @@ public class ArtRico extends Application
    */
   @Override
   public void start(Stage primaryStage) {
-    primaryStage.setTitle("ArtRik");
+    primaryStage.setTitle("ArtRico");
     showMenu(primaryStage);
   }
 

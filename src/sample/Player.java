@@ -12,7 +12,6 @@ public class Player extends SimpleObject implements MoveConstants {
   double rightBorder;
 
   /**
-   *
    * @param x
    * @param y
    * @param w

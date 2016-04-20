@@ -20,7 +20,6 @@ public class Client extends Thread implements Constants {
   SimpleObject rightWall;
   SimpleObject top;
   SimpleObject bottom;
-  Rectangle background;
   Label scoreLabel;
   Server server;
   Game game;
@@ -31,9 +30,9 @@ public class Client extends Thread implements Constants {
 
   public Client(char gameMode, Game game) {
     super();
+    this.game = game;
     server = new Server(gameMode, this);
     this.bricks = new ArrayList<>();
-    this.game = game;
     working = true;
     start();
   }
@@ -59,12 +58,10 @@ public class Client extends Thread implements Constants {
   private Pane initGame() {
     gameRoot = new Pane();
     gameRoot.setPrefSize(SCENE_WIDTH, SCENE_HEIGHT);
-    background = new Rectangle(SCENE_WIDTH, SCENE_HEIGHT, Color.GREY);
     scoreLabel = new Label();
     scoreLabel.setLayoutX(40);
-    scoreLabel.setLayoutY(0);
+    scoreLabel.setLayoutY(3);
     scoreLabel.setFont(javafx.scene.text.Font.font(20));
-    gameRoot.getChildren().add(background);
     gameRoot.getChildren().addAll(bricks);
     gameRoot.getChildren().addAll(player, ball, leftWall, rightWall, top, bottom);
     gameRoot.getChildren().add(scoreLabel);
@@ -126,5 +123,9 @@ public class Client extends Thread implements Constants {
 
   public char getDirection() {
     return direction;
+  }
+
+  public String getReplayFile(){
+    return game.getReplayFile();
   }
 }

@@ -18,7 +18,6 @@ public class Server extends Thread implements Constants, MoveConstants {
   boolean pause;
   Bot bot;
   boolean working;
-
   String replay;
   boolean replayNow;
   int replayIterator;
@@ -30,7 +29,7 @@ public class Server extends Thread implements Constants, MoveConstants {
     super();
     working = true;
     if (gameMode == REPLAY_MODE) {
-      replay = Serializer.loadReplay(REPLAY_FILE);
+      replay = Serializer.loadReplay(client.getReplayFile());
       if (!replay.isEmpty()) {
         replayNow = true;
         this.gameMode = replay.toCharArray()[0];
@@ -57,10 +56,9 @@ public class Server extends Thread implements Constants, MoveConstants {
       timer = new AnimationTimer() {
         @Override
         public void handle(long now) {
-          if(working) {
+          if (working) {
             update();
-          }
-          else {
+          } else {
             timer.stop();
           }
         }
@@ -72,22 +70,22 @@ public class Server extends Thread implements Constants, MoveConstants {
 
   private void createContent() {
     leftWall = new SimpleObject(0, 0, WALL_WIDTH, SCENE_HEIGHT,
-        STROKE_WIDTH, Color.ORANGE, Color.BEIGE);
+        STROKE_WIDTH, Color.ORANGERED, Color.BEIGE);
     rightWall = new SimpleObject(SCENE_WIDTH - WALL_WIDTH, 0, WALL_WIDTH,
-        SCENE_WIDTH, STROKE_WIDTH, Color.ORANGE, Color.BEIGE);
+        SCENE_WIDTH, STROKE_WIDTH, Color.ORANGERED, Color.BEIGE);
     bottom = new SimpleObject(0, SCENE_HEIGHT, SCENE_WIDTH, BOTTOM_HEIGHT,
-        STROKE_WIDTH, Color.ORANGE, Color.BEIGE);
+        STROKE_WIDTH, Color.ORANGERED, Color.BEIGE);
     top = new SimpleObject(0, 0, SCENE_WIDTH, TOP_HEIGHT,
-        STROKE_WIDTH, Color.ORANGE, Color.BEIGE);
+        STROKE_WIDTH, Color.ORANGERED, Color.BEIGE);
 
     switch (gameMode) {
       case EASY_MODE: {
         player = new Player(SCENE_WIDTH / 2 - PLAYER_WIDTH_EASY / 2,
             PLAYER_POS_Y, PLAYER_WIDTH_EASY, PLAYER_HEIGHT,
-            STROKE_WIDTH, Color.ORANGE, Color.BEIGE,
+            STROKE_WIDTH, Color.ORANGERED, Color.BEIGE,
             WALL_WIDTH, SCENE_WIDTH - WALL_WIDTH, PLAYER_SPEED_EASY);
         ball = new Ball(SCENE_WIDTH / 2 - BALL_SIZE / 2, PLAYER_POS_Y - BALL_SIZE,
-            BALL_SIZE, BALL_SIZE, STROKE_WIDTH, Color.ORANGE,
+            BALL_SIZE, BALL_SIZE, STROKE_WIDTH, Color.ORANGERED,
             Color.BEIGE, WALL_WIDTH, SCENE_WIDTH - WALL_WIDTH,
             TOP_HEIGHT, SCENE_HEIGHT, BALL_SPEED_EASY);
         break;
@@ -95,10 +93,10 @@ public class Server extends Thread implements Constants, MoveConstants {
       case MEDIUM_MODE: {
         player = new Player(SCENE_WIDTH / 2 - PLAYER_WIDTH_MEDIUM / 2,
             PLAYER_POS_Y, PLAYER_WIDTH_MEDIUM,
-            PLAYER_HEIGHT, STROKE_WIDTH, Color.ORANGE, Color.BEIGE,
+            PLAYER_HEIGHT, STROKE_WIDTH, Color.ORANGERED, Color.BEIGE,
             WALL_WIDTH, SCENE_WIDTH - WALL_WIDTH, PLAYER_SPEED_MEDIUM);
         ball = new Ball(SCENE_WIDTH / 2 - BALL_SIZE / 2, PLAYER_POS_Y - BALL_SIZE,
-            BALL_SIZE, BALL_SIZE, STROKE_WIDTH, Color.ORANGE,
+            BALL_SIZE, BALL_SIZE, STROKE_WIDTH, Color.ORANGERED,
             Color.BEIGE, WALL_WIDTH, SCENE_WIDTH - WALL_WIDTH,
             TOP_HEIGHT, SCENE_HEIGHT, BALL_SPEED_MEDIUM);
         break;
@@ -106,11 +104,11 @@ public class Server extends Thread implements Constants, MoveConstants {
       case HARD_MODE: {
         player = new Player(SCENE_WIDTH / 2 - PLAYER_WIDTH_HARD / 2,
             PLAYER_POS_Y, PLAYER_WIDTH_HARD, PLAYER_HEIGHT,
-            STROKE_WIDTH, Color.ORANGE, Color.BEIGE,
+            STROKE_WIDTH, Color.ORANGERED, Color.BEIGE,
             WALL_WIDTH, SCENE_WIDTH - WALL_WIDTH, PLAYER_SPEED_HARD);
         ball = new Ball(SCENE_WIDTH / 2 - BALL_SIZE / 2,
             PLAYER_POS_Y - BALL_SIZE, BALL_SIZE,
-            BALL_SIZE, STROKE_WIDTH, Color.ORANGE,
+            BALL_SIZE, STROKE_WIDTH, Color.ORANGERED,
             Color.BEIGE, WALL_WIDTH, SCENE_WIDTH - WALL_WIDTH,
             TOP_HEIGHT, SCENE_HEIGHT, BALL_SPEED_HARD);
         break;
@@ -135,7 +133,7 @@ public class Server extends Thread implements Constants, MoveConstants {
     for (int i = 0; i < raw; i++) {
       for (int j = 0; j < colomn; j++) {
         SimpleObject brick = new SimpleObject(j * width + 40, i * height + 75,
-            width, height, STROKE_WIDTH, Color.ORANGE, Color.BEIGE);
+            width, height, STROKE_WIDTH, Color.ORANGERED, Color.BEIGE);
         bricks.add(brick);
 
       }
@@ -173,7 +171,7 @@ public class Server extends Thread implements Constants, MoveConstants {
     if (replayNow) {
       replayIterator = 1;
     } else {
-      Serializer.saveReplay(REPLAY_FILE, replay);
+      Serializer.saveReplay(replay);
       replay = "" + gameMode;
     }
     client.resetBricks();
