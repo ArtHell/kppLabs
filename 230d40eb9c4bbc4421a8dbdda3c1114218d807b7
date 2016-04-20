@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "baa041b7_693812a1",
+        "filename": "src/sample/Ball.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1007669
+      },
+      "writtenOn": "2016-04-20T15:17:54Z",
+      "side": 1,
+      "message": "long method",
+      "range": {
+        "startLine": 69,
+        "startChar": 2,
+        "endLine": 205,
+        "endChar": 3
+      },
+      "revId": "230d40eb9c4bbc4421a8dbdda3c1114218d807b7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "baa041b7_b55aef4e",
         "filename": "src/sample/Bot.java",
         "patchSetId": 1
@@ -48,6 +71,52 @@
     },
     {
       "key": {
+        "uuid": "baa041b7_c9471e1c",
+        "filename": "src/sample/Bot.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1007669
+      },
+      "writtenOn": "2016-04-20T15:17:54Z",
+      "side": 1,
+      "message": "ternary opearator",
+      "range": {
+        "startLine": 33,
+        "startChar": 6,
+        "endLine": 38,
+        "endChar": 7
+      },
+      "revId": "230d40eb9c4bbc4421a8dbdda3c1114218d807b7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa041b7_e94c2244",
+        "filename": "src/sample/Bot.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1007669
+      },
+      "writtenOn": "2016-04-20T15:17:54Z",
+      "side": 1,
+      "message": "ternary opearator",
+      "range": {
+        "startLine": 40,
+        "startChar": 6,
+        "endLine": 45,
+        "endChar": 7
+      },
+      "revId": "230d40eb9c4bbc4421a8dbdda3c1114218d807b7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "baa041b7_75546720",
         "filename": "src/sample/Bot.java",
         "patchSetId": 1
@@ -63,6 +132,75 @@
         "startLine": 49,
         "startChar": 1,
         "endLine": 51,
+        "endChar": 5
+      },
+      "revId": "230d40eb9c4bbc4421a8dbdda3c1114218d807b7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa041b7_09450616",
+        "filename": "src/sample/Bot.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1007669
+      },
+      "writtenOn": "2016-04-20T15:17:54Z",
+      "side": 1,
+      "message": "ternary operator",
+      "range": {
+        "startLine": 60,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 5
+      },
+      "revId": "230d40eb9c4bbc4421a8dbdda3c1114218d807b7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa041b7_a9561ad0",
+        "filename": "src/sample/Constants.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1007669
+      },
+      "writtenOn": "2016-04-20T15:17:54Z",
+      "side": 1,
+      "message": "rename, it\u0027s not a constant",
+      "range": {
+        "startLine": 7,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 37
+      },
+      "revId": "230d40eb9c4bbc4421a8dbdda3c1114218d807b7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa041b7_695ff2e5",
+        "filename": "src/sample/Game.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1007669
+      },
+      "writtenOn": "2016-04-20T15:17:54Z",
+      "side": 1,
+      "message": "for what?",
+      "range": {
+        "startLine": 23,
+        "startChar": 5,
+        "endLine": 24,
         "endChar": 5
       },
       "revId": "230d40eb9c4bbc4421a8dbdda3c1114218d807b7",
@@ -132,6 +270,75 @@
         "startLine": 45,
         "startChar": 0,
         "endLine": 49,
+        "endChar": 5
+      },
+      "revId": "230d40eb9c4bbc4421a8dbdda3c1114218d807b7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa041b7_4909cedc",
+        "filename": "src/sample/Serializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1007669
+      },
+      "writtenOn": "2016-04-20T15:17:54Z",
+      "side": 1,
+      "message": "try/ catch for this statement",
+      "range": {
+        "startLine": 14,
+        "startChar": 4,
+        "endLine": 14,
+        "endChar": 35
+      },
+      "revId": "230d40eb9c4bbc4421a8dbdda3c1114218d807b7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa041b7_e9fae2bc",
+        "filename": "src/sample/Serializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1007669
+      },
+      "writtenOn": "2016-04-20T15:17:54Z",
+      "side": 1,
+      "message": "try/catch",
+      "range": {
+        "startLine": 28,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 35
+      },
+      "revId": "230d40eb9c4bbc4421a8dbdda3c1114218d807b7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa041b7_a904dabf",
+        "filename": "src/sample/Server.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1007669
+      },
+      "writtenOn": "2016-04-20T15:17:54Z",
+      "side": 1,
+      "message": "what\u0027s about ||",
+      "range": {
+        "startLine": 147,
+        "startChar": 4,
+        "endLine": 152,
         "endChar": 5
       },
       "revId": "230d40eb9c4bbc4421a8dbdda3c1114218d807b7",
