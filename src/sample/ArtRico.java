@@ -35,7 +35,8 @@ public class ArtRico extends Application
     for (int i = 0; i < MENU_SIZE; i++) {
       mainMenuButtons[i] = new Button();
       mainMenuButtons[i].setLayoutX(SCENE_WIDTH / 2 - BUTTON_WIDTH / 2);
-      mainMenuButtons[i].setLayoutY(i * (BUTTON_HEIGHT + BUTTON_BORDER) + BUTTON_BORDER);
+      mainMenuButtons[i].setLayoutY(i * (BUTTON_HEIGHT + BUTTON_BORDER)
+          + BUTTON_BORDER);
       mainMenuButtons[i].setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
       menuRoot.getChildren().add(mainMenuButtons[i]);
     }
@@ -52,7 +53,8 @@ public class ArtRico extends Application
       for (int i = 0; i < NEW_GAME_MENU_SIZE; i++) {
         newGameMenuButtons[i] = new Button();
         newGameMenuButtons[i].setLayoutX(SCENE_WIDTH / 2 - BUTTON_WIDTH / 2);
-        newGameMenuButtons[i].setLayoutY(i * (BUTTON_HEIGHT + BUTTON_BORDER) + BUTTON_BORDER);
+        newGameMenuButtons[i].setLayoutY(i * (BUTTON_HEIGHT + BUTTON_BORDER)
+            + BUTTON_BORDER);
         newGameMenuButtons[i].setPrefSize(BUTTON_WIDTH, BUTTON_HEIGHT);
         menuRoot.getChildren().add(newGameMenuButtons[i]);
       }
@@ -88,7 +90,8 @@ public class ArtRico extends Application
     });
 
     scene = new Scene(menuRoot);
-    scene.getStylesheets().add(ArtRico.class.getResource("style.css").toExternalForm());
+    scene.getStylesheets().add(ArtRico.class.getResource("style.css")
+        .toExternalForm());
     primaryStage.setScene(scene);
     primaryStage.show();
   }

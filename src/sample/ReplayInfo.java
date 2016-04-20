@@ -44,7 +44,8 @@ public class ReplayInfo implements Constants, Comparable<ReplayInfo> {
     int result = 0;
     switch (sortBy) {
       case 0:
-        result = Integer.compare(new Integer(replayName), new Integer(o.replayName));
+        result = Integer.compare(new Integer(replayName),
+            new Integer(o.replayName));
         break;
       case 1:
         result = replayMode.compareTo(o.replayMode);

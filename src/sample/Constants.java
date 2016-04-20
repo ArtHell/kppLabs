@@ -38,6 +38,7 @@ interface Constants {
   int BUTTON_BORDER = 20;
   int MENU_SIZE = 5;
   int NEW_GAME_MENU_SIZE = 4;
-  String[] TOP_LABEL_CONTENT = {"REPLAY", "MODE", "PLAYED", "MOVED LEFT", "MOVED RIGHT"};
+  String[] TOP_LABEL_CONTENT = {"REPLAY", "MODE", "PLAYED", "MOVED LEFT"
+      , "MOVED RIGHT"};
   String RESOURSE_FOLDER = "Resource\\";
 }

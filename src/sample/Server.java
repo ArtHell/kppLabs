@@ -84,7 +84,8 @@ public class Server extends Thread implements Constants, MoveConstants {
             PLAYER_POS_Y, PLAYER_WIDTH_EASY, PLAYER_HEIGHT,
             STROKE_WIDTH, Color.ORANGERED, Color.BEIGE,
             WALL_WIDTH, SCENE_WIDTH - WALL_WIDTH, PLAYER_SPEED_EASY);
-        ball = new Ball(SCENE_WIDTH / 2 - BALL_SIZE / 2, PLAYER_POS_Y - BALL_SIZE,
+        ball = new Ball(SCENE_WIDTH / 2 - BALL_SIZE / 2, PLAYER_POS_Y
+            - BALL_SIZE,
             BALL_SIZE, BALL_SIZE, STROKE_WIDTH, Color.ORANGERED,
             Color.BEIGE, WALL_WIDTH, SCENE_WIDTH - WALL_WIDTH,
             TOP_HEIGHT, SCENE_HEIGHT, BALL_SPEED_EASY);
@@ -95,7 +96,8 @@ public class Server extends Thread implements Constants, MoveConstants {
             PLAYER_POS_Y, PLAYER_WIDTH_MEDIUM,
             PLAYER_HEIGHT, STROKE_WIDTH, Color.ORANGERED, Color.BEIGE,
             WALL_WIDTH, SCENE_WIDTH - WALL_WIDTH, PLAYER_SPEED_MEDIUM);
-        ball = new Ball(SCENE_WIDTH / 2 - BALL_SIZE / 2, PLAYER_POS_Y - BALL_SIZE,
+        ball = new Ball(SCENE_WIDTH / 2 - BALL_SIZE / 2, PLAYER_POS_Y
+            - BALL_SIZE,
             BALL_SIZE, BALL_SIZE, STROKE_WIDTH, Color.ORANGERED,
             Color.BEIGE, WALL_WIDTH, SCENE_WIDTH - WALL_WIDTH,
             TOP_HEIGHT, SCENE_HEIGHT, BALL_SPEED_MEDIUM);
@@ -176,7 +178,8 @@ public class Server extends Thread implements Constants, MoveConstants {
     }
     client.resetBricks();
     createBricks(BRICKS_IN_RAW, BRICKS_IN_COLOMN, BRICKS_WIDTH, BRICKS_HEIGHT);
-    player.setTranslateX(SCENE_WIDTH / 2 - player.getWidth() / 2 + STROKE_WIDTH / 2);
+    player.setTranslateX(SCENE_WIDTH / 2 - player.getWidth() / 2
+        + STROKE_WIDTH / 2);
     player.setTranslateY(PLAYER_POS_Y);
     ball.setTranslateX(SCENE_WIDTH / 2 - BALL_SIZE / 2);
     ball.setTranslateY(PLAYER_POS_Y - BALL_SIZE);

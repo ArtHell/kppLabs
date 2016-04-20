@@ -41,7 +41,8 @@ public class Game extends Application implements Constants {
     } catch (InterruptedException e) {
     }
     scene = client.scene;
-    scene.getStylesheets().add(Game.class.getResource("style.css").toExternalForm());
+    scene.getStylesheets().add(Game.class.getResource("style.css")
+        .toExternalForm());
     gameStage.setScene(scene);
     gameStage.show();
   }
@@ -66,7 +67,8 @@ public class Game extends Application implements Constants {
     menuRoot.getChildren().add(gridPane);
     addLabels(gridPane);
     scene = new Scene(menuRoot);
-    scene.getStylesheets().add(Game.class.getResource("style.css").toExternalForm());
+    scene.getStylesheets().add(Game.class.getResource("style.css")
+        .toExternalForm());
 
     gridPane.setOnMouseClicked(e -> {
       int fileNumber = ((int) e.getY()) / GRID_LABEL_HEIGHT - 1;
@@ -75,7 +77,8 @@ public class Game extends Application implements Constants {
         replayFile = RESOURSE_FOLDER + fileNames[fileNumber];
         startGame();
       } else if (fileNumber == -1) {
-        ReplayInfo.sortBy = (int) e.getX() * 5 / (SCENE_WIDTH - GRID_INDENTS * 2);
+        ReplayInfo.sortBy = (int) e.getX() * 5 / (SCENE_WIDTH -
+            GRID_INDENTS * 2);
         replays.sort(ReplayInfo::compareTo);
         addLabels(gridPane);
       }
@@ -126,13 +129,15 @@ public class Game extends Application implements Constants {
       gridPane.add(gameTimeLabel, 2, i + 1);
 
       Label leftMovingTimeLabel = new Label();
-      leftMovingTimeLabel.setText(Integer.toString(replays.get(i).getLeftMovingTime()));
+      leftMovingTimeLabel.setText(Integer.toString(replays.get(i)
+          .getLeftMovingTime()));
       leftMovingTimeLabel.setPrefWidth((SCENE_WIDTH - GRID_INDENTS * 2) / 5);
       leftMovingTimeLabel.setPrefHeight(GRID_LABEL_HEIGHT);
       gridPane.add(leftMovingTimeLabel, 3, i + 1);
 
       Label rightMovingTimeLabel = new Label();
-      rightMovingTimeLabel.setText(Integer.toString(replays.get(i).getRightMovingTime()));
+      rightMovingTimeLabel.setText(Integer.toString(replays.get(i)
+          .getRightMovingTime()));
       rightMovingTimeLabel.setPrefWidth((SCENE_WIDTH - GRID_INDENTS * 2) / 5);
       rightMovingTimeLabel.setPrefHeight(GRID_LABEL_HEIGHT);
       gridPane.add(rightMovingTimeLabel, 4, i + 1);
