@@ -26,17 +26,10 @@ public class ReplayInfo implements Constants, Comparable<ReplayInfo> {
     rightMovingTime = 0;
     leftMovingTime = 0;
     gameTime = replay.length() - 1;
-    for (int i = 1; i <= gameTime; i++) {
-      char currentSymbol = replay.toCharArray()[i];
-      switch (currentSymbol) {
-        case 'l':
-          leftMovingTime++;
-          break;
-        case 'r':
-          rightMovingTime++;
-          break;
-      }
-    }
+    replay.toCharArray();
+    Algorithm algorithm = new Algorithm();
+    leftMovingTime = algorithm.countLeftMove(replay.toCharArray());
+    rightMovingTime = algorithm.countRightMove(replay.toCharArray());
   }
 
   @Override

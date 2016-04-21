@@ -43,7 +43,7 @@ public class ArtRico extends Application
 
     mainMenuButtons[0].setText("NEW GAME");
     mainMenuButtons[1].setText("SETTINGS");
-    mainMenuButtons[2].setText("ABOUT");
+    mainMenuButtons[2].setText("STATISTICS");
     mainMenuButtons[3].setText("REPLAY");
     mainMenuButtons[4].setText("EXIT");
 
@@ -78,6 +78,10 @@ public class ArtRico extends Application
         menuRoot.getChildren().removeAll(newGameMenuButtons);
         menuRoot.getChildren().addAll(mainMenuButtons);
       });
+    });
+
+    mainMenuButtons[2].setOnAction(event -> {
+      new Statistics();
     });
 
     mainMenuButtons[3].setOnAction(event -> {
