@@ -144,10 +144,7 @@ public class Server extends Thread implements Constants, MoveConstants {
   }
 
   private void update() {
-    if (ball.isGameWon()) {
-      restart();
-    }
-    if (ball.isGameOver()) {
+    if (ball.isGameWon() || ball.isGameOver()) {
       restart();
     }
     if (replayNow) {

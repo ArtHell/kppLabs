@@ -63,26 +63,34 @@ public class Ball extends SimpleObject {
     kx = 0;
   }
 
-  /**
-   *
-   */
-  public void checkCollision() {
+  void checkLeftWallCollision(){
     if (this.getTranslateX() + speed * kx <= leftBorder) {
       leftCollision = true;
     }
+  }
+
+  void checkRightWallCollision(){
     if (this.getTranslateX() + this.getWidth() + speed * kx
         >= rightBorder) {
       rightCollision = true;
     }
+  }
+
+  void checkTopCollision(){
     if (this.getTranslateY() + speed * ky <= topBorder) {
       topCollision = true;
     }
+  }
+
+  void checkBottomCollision(){
     if (this.getTranslateY() + this.getHeight() + speed * ky
         >= bottomBorder) {
 
       gameOver = true;
     }
-    // collision with player
+  }
+
+  void checkPlayerCollisionLeft(){
     if (ky > 0) {
       if (this.getTranslateX() + this.getWidth()
           > player.getTranslateX() &&
@@ -95,7 +103,9 @@ public class Ball extends SimpleObject {
         }
       }
     }
-    // collision with player
+  }
+
+  void checkPlayerCollisionRight(){
     if (kx > 0) {
       if (this.getTranslateY() + this.getHeight()
           > player.getTranslateY() &&
@@ -108,7 +118,9 @@ public class Ball extends SimpleObject {
         }
       }
     }
-    // collision with player
+  }
+
+  void checkPlayerCollisionTop(){
     if (kx < 0) {
       if (this.getTranslateY() + this.getHeight()
           > player.getTranslateY() &&
@@ -123,8 +135,15 @@ public class Ball extends SimpleObject {
         }
       }
     }
-    // collision with brick
+  }
 
+  void checkPlayerCollision(){
+    checkPlayerCollisionLeft();
+    checkPlayerCollisionRight();
+    checkPlayerCollisionTop();
+  }
+
+  void checkBrickCollisionBottom(){
     for (int i = 0; i < bricks.size(); i++) {
       SimpleObject brick = bricks.get(i);
       if (this.getTranslateX() + this.getWidth()
@@ -143,8 +162,9 @@ public class Ball extends SimpleObject {
         }
       }
     }
+  }
 
-    // collision with brick
+  void checkBrickCollisionTop(){
     for (int i = 0; i < bricks.size(); i++) {
       SimpleObject brick = bricks.get(i);
       if (this.getTranslateX() + this.getWidth()
@@ -165,25 +185,9 @@ public class Ball extends SimpleObject {
         }
       }
     }
+  }
 
-    // collision with brick
-    if (kx > 0) {
-      for (int i = 0; i < bricks.size(); i++) {
-        SimpleObject brick = bricks.get(i);
-        if (this.getTranslateY() + this.getHeight()
-            > brick.getTranslateY() &&
-            this.getTranslateY() < brick.getTranslateY()
-                + brick.getHeight()) {
-          if (this.getTranslateX() <= brick.getTranslateX() &&
-              this.getTranslateX() + this.getWidth()
-                  >= brick.getTranslateX()) {
-            leftCollision = true;
-            indexs.add(i);
-          }
-        }
-      }
-    }
-    // collision with brick
+  void checkBrickCollisionRight(){
     if (kx < 0) {
       for (int i = 0; i < bricks.size(); i++) {
         SimpleObject brick = bricks.get(i);
@@ -204,6 +208,63 @@ public class Ball extends SimpleObject {
     }
   }
 
+  void checkBrickCollisionLeft(){
+    if (kx > 0) {
+      for (int i = 0; i < bricks.size(); i++) {
+        SimpleObject brick = bricks.get(i);
+        if (this.getTranslateY() + this.getHeight()
+            > brick.getTranslateY() &&
+            this.getTranslateY() < brick.getTranslateY()
+                + brick.getHeight()) {
+          if (this.getTranslateX() <= brick.getTranslateX() &&
+              this.getTranslateX() + this.getWidth()
+                  >= brick.getTranslateX()) {
+            leftCollision = true;
+            indexs.add(i);
+          }
+        }
+      }
+    }
+  }
+
+  void checkBrickCollision(){
+    checkBrickCollisionBottom();
+    checkBrickCollisionTop();
+    checkBrickCollisionLeft();
+    checkBrickCollisionRight();
+  }
+
+  /**
+   *
+   */
+  public void checkCollision() {
+    checkLeftWallCollision();
+    checkRightWallCollision();
+    checkTopCollision();
+    checkBottomCollision();
+    checkPlayerCollision();
+    checkBrickCollision();
+  }
+
+  void destroyBricks(){
+    Set ixs = new HashSet(indexs);
+    indexs.clear();
+    indexs.addAll(ixs);
+    indexs.sort(Comparator.naturalOrder());
+    for (int k = 0; indexs.size() > 0; k++) {
+      SimpleObject b = bricks.get(indexs.get(0) - k);
+      b.setVisible(false);
+      bricks.remove(b);
+      indexs.remove(0);
+      score++;
+    }
+  }
+
+  void moveBall(){
+    setTranslateX(getTranslateX() + speed * kx);
+    setTranslateY(getTranslateY() + speed * ky);
+  }
+
   /**
    *
    */
@@ -222,25 +283,11 @@ public class Ball extends SimpleObject {
       kx = k;
       ky = -0.8 - (1 - Math.abs(k));
     }
-    // destroying bricks
-    Set ixs = new HashSet(indexs);
-    indexs.clear();
-    indexs.addAll(ixs);
-    indexs.sort(Comparator.naturalOrder());
-    for (int k = 0; indexs.size() > 0; k++) {
-      SimpleObject b = bricks.get(indexs.get(0) - k);
-      b.setVisible(false);
-      bricks.remove(b);
-      indexs.remove(0);
-      score++;
-    }
+    destroyBricks();
     if (bricks.size() == 0) {
       gameWon = true;
     }
-
-    // move ball
-    setTranslateX(getTranslateX() + speed * kx);
-    setTranslateY(getTranslateY() + speed * ky);
+    moveBall();
     setFlagsInFalse(); // reset flags
   }
 

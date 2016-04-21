@@ -74,7 +74,7 @@ public class Game extends Application implements Constants {
       int fileNumber = ((int) e.getY()) / GRID_LABEL_HEIGHT - 1;
       if (fileNumber != -1 && fileNumber < fileNames.length) {
         menuRoot.getChildren().remove(gridPane);
-        replayFile = RESOURSE_FOLDER + fileNames[fileNumber];
+        replayFile = RESOURSE_FOLDER + replays.get(fileNumber).getReplayName();
         startGame();
       } else if (fileNumber == -1) {
         ReplayInfo.sortBy = (int) e.getX() * 5 / (SCENE_WIDTH -
