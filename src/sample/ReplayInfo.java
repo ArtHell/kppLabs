@@ -1,5 +1,8 @@
 package sample;
 
+/**
+ * class store information about replays
+ */
 public class ReplayInfo implements Constants, Comparable<ReplayInfo> {
   String replayName;
   String replay;
@@ -9,9 +12,14 @@ public class ReplayInfo implements Constants, Comparable<ReplayInfo> {
   int gameTime;
   static int sortBy;
 
+  /**
+   * constructor
+   *
+   * @param replayName
+   */
   ReplayInfo(String replayName) {
     this.replayName = replayName;
-    replay = Serializer.loadReplay(RESOURSE_FOLDER + replayName);
+    replay = Serializer.loadReplay(RESOURCE_FOLDER + replayName);
     switch (replay.toCharArray()[0]) {
       case 'e':
         replayMode = "EASY";
@@ -32,6 +40,12 @@ public class ReplayInfo implements Constants, Comparable<ReplayInfo> {
     rightMovingTime = algorithm.countRightMove(replay.toCharArray());
   }
 
+  /**
+   * realize comparable interface
+   *
+   * @param o
+   * @return
+   */
   @Override
   public int compareTo(ReplayInfo o) {
     int result = 0;
@@ -56,22 +70,47 @@ public class ReplayInfo implements Constants, Comparable<ReplayInfo> {
     return result;
   }
 
+  /**
+   * getter for right moving time
+   *
+   * @return
+   */
   public int getRightMovingTime() {
     return rightMovingTime;
   }
 
+  /**
+   * getter for replay mode
+   *
+   * @return
+   */
   public String getReplayMode() {
     return replayMode;
   }
 
+  /**
+   * getter for left moving time
+   *
+   * @return
+   */
   public int getLeftMovingTime() {
     return leftMovingTime;
   }
 
+  /**
+   * getter for game time
+   *
+   * @return
+   */
   public int getGameTime() {
     return gameTime;
   }
 
+  /**
+   * getter for replay name
+   *
+   * @return
+   */
   public String getReplayName() {
     return replayName;
   }

@@ -4,14 +4,16 @@ import java.io.*;
 import java.util.Date;
 
 /**
- *
+ * save and load replays from Resource folder
  */
 public class Serializer implements Constants {
   /**
+   * save replay with unique name
+   *
    * @param string
    */
   public static void saveReplay(String string) {
-    File folder = new File(RESOURSE_FOLDER);
+    File folder = new File(RESOURCE_FOLDER);
     String[] fileNames = folder.list();
     int max = 0;
     if (fileNames != null) {
@@ -25,12 +27,11 @@ public class Serializer implements Constants {
         max++;
       } catch (NumberFormatException e) {
       }
-    }
-    else {
+    } else {
       max = 1;
     }
 
-    String fileName = RESOURSE_FOLDER + Integer.toString(max);
+    String fileName = RESOURCE_FOLDER + Integer.toString(max);
     File file = new File(fileName);
     try (FileWriter writer = new FileWriter(file, false)) {
       writer.write(string);
@@ -41,6 +42,8 @@ public class Serializer implements Constants {
   }
 
   /**
+   * load replay by name
+   *
    * @param fileName
    * @return
    */

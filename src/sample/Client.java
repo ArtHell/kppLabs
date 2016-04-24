@@ -9,7 +9,9 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-
+/**
+ * responsible for graphics and handlers in game
+ */
 public class Client extends Thread implements Constants {
   Pane gameRoot;
   Scene scene;
@@ -81,9 +83,6 @@ public class Client extends Thread implements Constants {
     this.bottom = bottom;
   }
 
-  /**
-   *
-   */
   private void prepareActionHandlers() {
     lastKey = new HashSet<>();
     direction = 'n';
@@ -102,9 +101,7 @@ public class Client extends Thread implements Constants {
           server.bot.switchMode();
           break;
         case "ESCAPE":
-          server.working = false;
           game.exit();
-          this.working = false;
       }
       lastKey.add(event.getCode().toString());
     });
@@ -125,7 +122,7 @@ public class Client extends Thread implements Constants {
     return direction;
   }
 
-  public String getReplayFile(){
+  public String getReplayFile() {
     return game.getReplayFile();
   }
 }

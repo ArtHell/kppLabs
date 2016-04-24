@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
+ * ball can fly and destroy bricks
  */
 public class Ball extends SimpleObject {
   Player player;
@@ -63,26 +63,26 @@ public class Ball extends SimpleObject {
     kx = 0;
   }
 
-  void checkLeftWallCollision(){
+  void checkLeftWallCollision() {
     if (this.getTranslateX() + speed * kx <= leftBorder) {
       leftCollision = true;
     }
   }
 
-  void checkRightWallCollision(){
+  void checkRightWallCollision() {
     if (this.getTranslateX() + this.getWidth() + speed * kx
         >= rightBorder) {
       rightCollision = true;
     }
   }
 
-  void checkTopCollision(){
+  void checkTopCollision() {
     if (this.getTranslateY() + speed * ky <= topBorder) {
       topCollision = true;
     }
   }
 
-  void checkBottomCollision(){
+  void checkBottomCollision() {
     if (this.getTranslateY() + this.getHeight() + speed * ky
         >= bottomBorder) {
 
@@ -90,7 +90,7 @@ public class Ball extends SimpleObject {
     }
   }
 
-  void checkPlayerCollisionLeft(){
+  void checkPlayerCollisionLeft() {
     if (ky > 0) {
       if (this.getTranslateX() + this.getWidth()
           > player.getTranslateX() &&
@@ -105,7 +105,7 @@ public class Ball extends SimpleObject {
     }
   }
 
-  void checkPlayerCollisionRight(){
+  void checkPlayerCollisionRight() {
     if (kx > 0) {
       if (this.getTranslateY() + this.getHeight()
           > player.getTranslateY() &&
@@ -120,7 +120,7 @@ public class Ball extends SimpleObject {
     }
   }
 
-  void checkPlayerCollisionTop(){
+  void checkPlayerCollisionTop() {
     if (kx < 0) {
       if (this.getTranslateY() + this.getHeight()
           > player.getTranslateY() &&
@@ -137,13 +137,13 @@ public class Ball extends SimpleObject {
     }
   }
 
-  void checkPlayerCollision(){
+  void checkPlayerCollision() {
     checkPlayerCollisionLeft();
     checkPlayerCollisionRight();
     checkPlayerCollisionTop();
   }
 
-  void checkBrickCollisionBottom(){
+  void checkBrickCollisionBottom() {
     for (int i = 0; i < bricks.size(); i++) {
       SimpleObject brick = bricks.get(i);
       if (this.getTranslateX() + this.getWidth()
@@ -164,7 +164,7 @@ public class Ball extends SimpleObject {
     }
   }
 
-  void checkBrickCollisionTop(){
+  void checkBrickCollisionTop() {
     for (int i = 0; i < bricks.size(); i++) {
       SimpleObject brick = bricks.get(i);
       if (this.getTranslateX() + this.getWidth()
@@ -187,7 +187,7 @@ public class Ball extends SimpleObject {
     }
   }
 
-  void checkBrickCollisionRight(){
+  void checkBrickCollisionRight() {
     if (kx < 0) {
       for (int i = 0; i < bricks.size(); i++) {
         SimpleObject brick = bricks.get(i);
@@ -208,7 +208,7 @@ public class Ball extends SimpleObject {
     }
   }
 
-  void checkBrickCollisionLeft(){
+  void checkBrickCollisionLeft() {
     if (kx > 0) {
       for (int i = 0; i < bricks.size(); i++) {
         SimpleObject brick = bricks.get(i);
@@ -227,7 +227,7 @@ public class Ball extends SimpleObject {
     }
   }
 
-  void checkBrickCollision(){
+  void checkBrickCollision() {
     checkBrickCollisionBottom();
     checkBrickCollisionTop();
     checkBrickCollisionLeft();
@@ -246,7 +246,7 @@ public class Ball extends SimpleObject {
     checkBrickCollision();
   }
 
-  void destroyBricks(){
+  void destroyBricks() {
     Set ixs = new HashSet(indexs);
     indexs.clear();
     indexs.addAll(ixs);
@@ -260,13 +260,13 @@ public class Ball extends SimpleObject {
     }
   }
 
-  void moveBall(){
+  void moveBall() {
     setTranslateX(getTranslateX() + speed * kx);
     setTranslateY(getTranslateY() + speed * ky);
   }
 
   /**
-   *
+   * move brick after check of collisions
    */
   public void move() {
     checkCollision();
@@ -322,7 +322,7 @@ public class Ball extends SimpleObject {
   }
 
   /**
-   *
+   * reset flags before start new game
    */
   public void setFlagsInFalse() {
     leftCollision = false;

@@ -1,7 +1,7 @@
 package sample;
 
 /**
- *
+ * storage of constants
  */
 interface Constants {
   int SCENE_WIDTH = 640;
@@ -19,6 +19,7 @@ interface Constants {
   char HARD_MODE = 'h';
   char REPLAY_MODE = 'r';
   int ITER_COUNT = 10000;
+  int NOTES_ON_SCREEN = 19;
   int PLAYER_WIDTH_EASY = 280;
   int PLAYER_WIDTH_MEDIUM = 200;
   int PLAYER_WIDTH_HARD = 200;
@@ -43,5 +44,5 @@ interface Constants {
   int STATISTICS_LABEL_WIDTH = 320;
   String[] TOP_LABEL_CONTENT = {"REPLAY", "MODE", "PLAYED", "MOVED LEFT"
       , "MOVED RIGHT"};
-  String RESOURSE_FOLDER = "Resource\\";
+  String RESOURCE_FOLDER = "Resource\\";
 }

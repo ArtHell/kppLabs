@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /**
- *
+ * the simplest graphic object in game such as wall
  */
 public class SimpleObject extends Pane {
   Rectangle rect;

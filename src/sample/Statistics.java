@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * new window contain statistics of all played games
+ */
 public class Statistics extends Application implements Constants {
   Stage stage;
   Pane root;
@@ -21,7 +24,7 @@ public class Statistics extends Application implements Constants {
   int allTimeMovedLeft;
   int allTimeNotMoved;
 
-  public Statistics(){
+  public Statistics() {
     replays = new ArrayList<>();
     allTimePlayed = 0;
     allTimeMovedRight = 0;
@@ -31,10 +34,12 @@ public class Statistics extends Application implements Constants {
     start(stage);
   }
 
-  void initStatistics(){
-    File folder = new File(RESOURSE_FOLDER);
+  void initStatistics() {
+
+    File folder = new File(RESOURCE_FOLDER);
     String[] fileNames = folder.list();
-    if(fileNames == null) {
+
+    if (fileNames == null) {
       return;
     }
     for (int i = 0; i < fileNames.length; i++) {
@@ -54,13 +59,14 @@ public class Statistics extends Application implements Constants {
   @Override
   public void start(Stage stage) {
     initStatistics();
-    Button [] buttons = new Button[4];
-    for(int i = 0; i < 4; i++){
+    Button[] buttons = new Button[4];
+    for (int i = 0; i < 4; i++) {
       buttons[i] = new Button();
-      buttons[i].setTranslateY(STATISTICS_LABEL_INDENTS+i*(STATISTICS_LABEL_INDENTS+STATISTICS_LABEL_HEIGHT));
+      buttons[i].setTranslateY(STATISTICS_LABEL_INDENTS + i
+          * (STATISTICS_LABEL_INDENTS + STATISTICS_LABEL_HEIGHT));
       buttons[i].setPrefWidth(STATISTICS_LABEL_WIDTH);
       buttons[i].setPrefHeight(STATISTICS_LABEL_HEIGHT);
-      buttons[i].setTranslateX(SCENE_WIDTH/2 - STATISTICS_LABEL_WIDTH/2);
+      buttons[i].setTranslateX(SCENE_WIDTH / 2 - STATISTICS_LABEL_WIDTH / 2);
     }
     buttons[0].setText("Time played: " + allTimePlayed);
     buttons[1].setText("Time moved right: " + allTimeMovedRight);

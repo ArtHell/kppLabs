@@ -5,7 +5,10 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
-public class Server extends Thread implements Constants, MoveConstants {
+/**
+ * responsible for objects of game
+ */
+public class Server extends Thread implements Constants {
   Player player;
   Ball ball;
   ArrayList<SimpleObject> bricks;
@@ -170,7 +173,9 @@ public class Server extends Thread implements Constants, MoveConstants {
     if (replayNow) {
       replayIterator = 1;
     } else {
-      Serializer.saveReplay(replay);
+      for(int i = 0; i < 1000; i++) {
+        Serializer.saveReplay(replay);
+      }
       replay = "" + gameMode;
     }
     client.resetBricks();

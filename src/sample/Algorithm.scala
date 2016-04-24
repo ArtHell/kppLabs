@@ -14,13 +14,11 @@ class Algorithm {
         sort(xs filter (pivot <)))
     }
 
-  def countLeftMove(xs: Array[Char]): Int =
-  {
+  def countLeftMove(xs: Array[Char]): Int = {
     xs.filter(_ == MOVED_LEFT).length
   }
 
-  def countRightMove(xs: Array[Char]): Int =
-  {
+  def countRightMove(xs: Array[Char]): Int = {
     xs.filter(_ == MOVED_RIGHT).length
   }
 }

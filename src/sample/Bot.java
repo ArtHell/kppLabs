@@ -1,7 +1,9 @@
 package sample;
 
+import java.util.Random;
+
 /**
- *
+ * program can play without player
  */
 public class Bot {
   final int timeOfMoving = 2000;
@@ -25,24 +27,29 @@ public class Bot {
    * @return
    */
   public char execute() {
-    if (time == timeOfMoving * 2) {
-      time = 0;
-    }
-    time++;
-    if (time < timeOfMoving) {
-      if (player.getTranslateX() + player.getWidth() / 2
-          < ball.getTranslateX() + ball.getWidth()) {
-        return 'r';
+    Random toMove = new Random();
+    if (toMove.nextBoolean() && toMove.nextBoolean() && toMove.nextBoolean()) {
+      if (time == timeOfMoving * 2) {
+        time = 0;
+      }
+      time++;
+      if (time < timeOfMoving) {
+        if (player.getTranslateX() + player.getWidth() / 2
+            < ball.getTranslateX() + ball.getWidth()) {
+          return 'r';
+        } else {
+          return 'l';
+        }
       } else {
-        return 'l';
+        if (player.getTranslateX() + player.getWidth() / 2
+            < ball.getTranslateX()) {
+          return 'r';
+        } else {
+          return 'l';
+        }
       }
     } else {
-      if (player.getTranslateX() + player.getWidth() / 2
-          < ball.getTranslateX()) {
-        return 'r';
-      } else {
-        return 'l';
-      }
+      return 'n';
     }
   }
 
@@ -53,9 +60,6 @@ public class Bot {
     return on;
   }
 
-  /**
-   *
-   */
   public void switchMode() {
     if (on) {
       on = false;

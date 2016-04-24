@@ -4,9 +4,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /**
- *
+ * Platform of player, can move left and right
  */
-public class Player extends SimpleObject implements MoveConstants {
+public class Player extends SimpleObject {
   double speed;
   double leftBorder;
   double rightBorder;
@@ -32,20 +32,12 @@ public class Player extends SimpleObject implements MoveConstants {
     this.speed = speed;
   }
 
-  /**
-   *
-   *
-   */
   public void moveLeft() {
     if (this.getTranslateX() > leftBorder) {
       setTranslateX(this.getTranslateX() - speed);
     }
   }
 
-  /**
-   *
-   *
-   */
   public void moveRight() {
     if (this.getTranslateX() + this.getWidth() < rightBorder) {
       setTranslateX(this.getTranslateX() + speed);
