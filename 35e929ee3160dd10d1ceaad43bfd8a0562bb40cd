@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "baa041b7_03407355",
+        "filename": "src/sample/ArtRico.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1007647
+      },
+      "writtenOn": "2016-05-18T20:55:31Z",
+      "side": 1,
+      "message": "это поменял на константы свои, лень перезаливать",
+      "range": {
+        "startLine": 133,
+        "startChar": 11,
+        "endLine": 133,
+        "endChar": 14
+      },
+      "revId": "35e929ee3160dd10d1ceaad43bfd8a0562bb40cd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
