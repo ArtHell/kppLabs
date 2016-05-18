@@ -42,11 +42,11 @@ public class Game extends Application implements Constants {
   public void startGame() {
     client = new Client(gameMode, this);
     try {
-      Thread.sleep(500);
+      Thread.sleep(START_DELAY);
     } catch (InterruptedException e) {
     }
     scene = client.scene;
-    scene.getStylesheets().add(Game.class.getResource("style.css")
+    scene.getStylesheets().add(Game.class.getResource(STYLE_FILE)
         .toExternalForm());
     gameStage.setScene(scene);
     gameStage.setOnCloseRequest(e -> {
@@ -92,7 +92,8 @@ public class Game extends Application implements Constants {
       int fileNumber = ((int) e.getY()) / GRID_LABEL_HEIGHT - 1;
       if (fileNumber != -1 && fileNumber < NOTES_ON_SCREEN) {
         menuRoot.getChildren().remove(gridPane);
-        replayFile = RESOURCE_FOLDER + replays.get(fileNumber).getReplayName();
+        replayFile = RESOURCE_FOLDER
+            + replays.get(fileNumber + currentIter).getReplayName();
         startGame();
       } else if (fileNumber == -1) {
         ReplayInfo.sortBy = (int) e.getX() * 5 / (SCENE_WIDTH -
@@ -201,27 +202,17 @@ public class Game extends Application implements Constants {
   }
 
   void sortTest() {
-    long start;
-    long end;
     long traceTime;
     Algorithm algorithm = new Algorithm();
     JavaSort javaSort = new JavaSort();
-    int[] array = new int[replays.size()*100];
-    for (int j = 0; j < 100; j++){
-      for (int i = 0; i < replays.size(); i++) {
-        array[j * replays.size() + i] = replays.get(i).getGameTime();
-      }
+    int[] array = new int[fileNames.length];
+    for (int i = 0; i < fileNames.length; i++) {
+      array[i] = replays.get(i).getGameTime();
     }
     System.out.println("Time of sorting:");
-    start = System.nanoTime();
-    algorithm.sort(array);
-    end = System.nanoTime();
-    traceTime = end - start;
+    traceTime = algorithm.testSort(array);
     System.out.println("Scala: " + traceTime);
-    start = System.nanoTime();
-    javaSort.sort(array);
-    end = System.nanoTime();
-    traceTime = end - start;
+    traceTime = javaSort.testSort(array);
     System.out.println("Java:  " + traceTime);
   }
 

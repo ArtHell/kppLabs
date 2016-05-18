@@ -1,21 +1,25 @@
 .root {
-    -fx-background-image: url("metal.jpg");
+  -fx-background-image: url("metal.jpg");
 }
 
 .label {
-    -fx-text-fill: white;
-        -fx-font-family: "Arial Narrow";
-        -fx-font-size: 20;
-        -fx-font-weight: bold;
-        -fx-background-image: url("brick.jpg");
-        -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+  -fx-text-fill: white;
+  -fx-font-family: "Arial Narrow";
+  -fx-font-size: 20;
+  -fx-font-weight: bold;
+  -fx-background-image: url("brick.jpg");
+  -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 
 .button {
-    -fx-text-fill: white;
-    -fx-font-family: "Arial Narrow";
-    -fx-font-size: 20;
-    -fx-font-weight: bold;
-    -fx-background-image: url("brick.jpg");
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+  -fx-text-fill: white;
+  -fx-font-family: "Arial Narrow";
+  -fx-font-size: 20;
+  -fx-font-weight: bold;
+  -fx-background-image: url("brick.jpg");
+  -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+#b {
+  -fx-background-image: url("brick.jpg");
 }

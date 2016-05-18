@@ -42,7 +42,7 @@ public class Client extends Thread implements Constants {
   @Override
   public void run() {
     try {
-      sleep(100000);
+      sleep(WAIT_TIME);
     } catch (InterruptedException e) {
       scene = new Scene(initGame());
       prepareActionHandlers();
@@ -50,7 +50,7 @@ public class Client extends Thread implements Constants {
     }
     while (working) {
       try {
-        sleep(10000);
+        sleep(WAIT_TIME);
       } catch (InterruptedException e) {
         return;
       }
@@ -89,10 +89,10 @@ public class Client extends Thread implements Constants {
     scene.setOnKeyPressed(event -> {
       switch (event.getCode().toString()) {
         case "LEFT":
-          direction = 'l';
+          direction = LEFT_MOVE;
           break;
         case "RIGHT":
-          direction = 'r';
+          direction = RIGHT_MOVE;
           break;
         case "SPACE":
           server.animationSwitch();
@@ -106,7 +106,7 @@ public class Client extends Thread implements Constants {
       lastKey.add(event.getCode().toString());
     });
     scene.setOnKeyReleased(event -> {
-      direction = 'n';
+      direction = NOT_MOVE;
     });
   }
 

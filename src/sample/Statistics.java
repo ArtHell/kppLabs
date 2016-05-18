@@ -23,6 +23,8 @@ public class Statistics extends Application implements Constants {
   int allTimeMovedRight;
   int allTimeMovedLeft;
   int allTimeNotMoved;
+  String theBiggestSeq;
+  String [] allReplays;
 
   public Statistics() {
     replays = new ArrayList<>();
@@ -30,6 +32,7 @@ public class Statistics extends Application implements Constants {
     allTimeMovedRight = 0;
     allTimeMovedLeft = 0;
     allTimeNotMoved = 0;
+    theBiggestSeq = "";
     this.stage = new Stage();
     start(stage);
   }
@@ -47,13 +50,17 @@ public class Statistics extends Application implements Constants {
       replays.add(replayInfo);
     }
 
+    allReplays = new String[fileNames.length];
+
     for (int i = 0; i < replays.size(); i++) {
       allTimePlayed += replays.get(i).getGameTime();
       allTimeMovedRight += replays.get(i).getRightMovingTime();
       allTimeMovedLeft += replays.get(i).getLeftMovingTime();
+      allReplays[i] = replays.get(i).replay;
     }
 
     allTimeNotMoved = allTimePlayed - allTimeMovedLeft - allTimeMovedRight;
+    theBiggestSeq = new Algorithm().findMaxRepeatedSeq(allReplays);
   }
 
   @Override
@@ -68,7 +75,7 @@ public class Statistics extends Application implements Constants {
       buttons[i].setPrefHeight(STATISTICS_LABEL_HEIGHT);
       buttons[i].setTranslateX(SCENE_WIDTH / 2 - STATISTICS_LABEL_WIDTH / 2);
     }
-    buttons[0].setText("Time played: " + allTimePlayed);
+    buttons[0].setText("The biggest sequence: " + theBiggestSeq);
     buttons[1].setText("Time moved right: " + allTimeMovedRight);
     buttons[2].setText("Time moved left: " + allTimeMovedLeft);
     buttons[3].setText("Time not moved: " + allTimeNotMoved);

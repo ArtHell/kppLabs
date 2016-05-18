@@ -5,6 +5,13 @@ package sample;
  */
 public class JavaSort {
 
+  long testSort(int[] xs) {
+    long start = System.nanoTime();
+    sort(xs);
+    long end = System.nanoTime();
+    return end - start;
+  }
+
   /**
    * interface for quicksort
    *
@@ -22,6 +29,7 @@ public class JavaSort {
    * @param r
    */
   void sort(int[] xs, int l, int r) {
+
     int pivot = xs[(l + r) / 2];
     int a = l;
     int b = r;

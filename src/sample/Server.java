@@ -54,7 +54,7 @@ public class Server extends Thread implements Constants {
     client.setContent(player, ball, bricks, leftWall, rightWall, top, bottom);
     client.interrupt();
     try {
-      sleep(100000);
+      sleep(WAIT_TIME);
     } catch (InterruptedException e) {
       timer = new AnimationTimer() {
         @Override
@@ -173,9 +173,7 @@ public class Server extends Thread implements Constants {
     if (replayNow) {
       replayIterator = 1;
     } else {
-      for(int i = 0; i < 1000; i++) {
-        Serializer.saveReplay(replay);
-      }
+      Serializer.saveReplay(replay);
       replay = "" + gameMode;
     }
     client.resetBricks();

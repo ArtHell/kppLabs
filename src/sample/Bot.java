@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * program can play without player
  */
-public class Bot {
+public class Bot implements Constants {
   final int timeOfMoving = 2000;
   Player player;
   Ball ball;
@@ -36,20 +36,20 @@ public class Bot {
       if (time < timeOfMoving) {
         if (player.getTranslateX() + player.getWidth() / 2
             < ball.getTranslateX() + ball.getWidth()) {
-          return 'r';
+          return RIGHT_MOVE;
         } else {
-          return 'l';
+          return LEFT_MOVE;
         }
       } else {
         if (player.getTranslateX() + player.getWidth() / 2
             < ball.getTranslateX()) {
-          return 'r';
+          return RIGHT_MOVE;
         } else {
-          return 'l';
+          return LEFT_MOVE;
         }
       }
     } else {
-      return 'n';
+      return NOT_MOVE;
     }
   }
 

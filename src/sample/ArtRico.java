@@ -126,7 +126,7 @@ public class ArtRico extends Application
     menuRoot.setPrefSize(SCENE_WIDTH, SCENE_HEIGHT);
     createMainMenuButtons();
     scene = new Scene(menuRoot);
-    scene.getStylesheets().add(ArtRico.class.getResource("style.css")
+    scene.getStylesheets().add(ArtRico.class.getResource(STYLE_FILE)
         .toExternalForm());
     primaryStage.setScene(scene);
     primaryStage.show();

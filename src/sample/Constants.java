@@ -18,7 +18,9 @@ interface Constants {
   char MEDIUM_MODE = 'm';
   char HARD_MODE = 'h';
   char REPLAY_MODE = 'r';
-  int ITER_COUNT = 10000;
+  char LEFT_MOVE = 'l';
+  char RIGHT_MOVE = 'r';
+  char NOT_MOVE = 'n';
   int NOTES_ON_SCREEN = 19;
   int PLAYER_WIDTH_EASY = 280;
   int PLAYER_WIDTH_MEDIUM = 200;
@@ -42,7 +44,10 @@ interface Constants {
   int STATISTICS_LABEL_INDENTS = 20;
   int STATISTICS_LABEL_HEIGHT = 130;
   int STATISTICS_LABEL_WIDTH = 320;
+  int WAIT_TIME = 100000;
+  int START_DELAY = 500;
   String[] TOP_LABEL_CONTENT = {"REPLAY", "MODE", "PLAYED", "MOVED LEFT"
       , "MOVED RIGHT"};
   String RESOURCE_FOLDER = "Resource\\";
+  String STYLE_FILE = "style.css";
 }

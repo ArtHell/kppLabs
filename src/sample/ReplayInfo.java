@@ -21,13 +21,13 @@ public class ReplayInfo implements Constants, Comparable<ReplayInfo> {
     this.replayName = replayName;
     replay = Serializer.loadReplay(RESOURCE_FOLDER + replayName);
     switch (replay.toCharArray()[0]) {
-      case 'e':
+      case EASY_MODE:
         replayMode = "EASY";
         break;
-      case 'm':
+      case MEDIUM_MODE:
         replayMode = "MEDIUM";
         break;
-      case 'h':
+      case HARD_MODE:
         replayMode = "HARD";
         break;
     }
